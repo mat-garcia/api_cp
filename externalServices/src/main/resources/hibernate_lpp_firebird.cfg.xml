@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+		"-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+		"http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+	<session-factory>
+	<!-- 	<property name="hibernate.dialect">br.com.hdnit.lotusl.pms.cm.dao.Firebird21Dialect</property>
+		<property name="hibernate.connection.driver_class">org.firebirdsql.jdbc.FBDriver</property>
+	 -->	<!-- <property name="hibernate.show_sql">true</property> -->
+		<!-- <property name="hibernate.format_sql">true</property> -->
+		<!-- BANCO PRODUCAO NUVEM -->
+
+		<!-- jelastic ip externo -->
+	<!-- 	<property name="hibernate.connection.url">jdbc:firebirdsql://localhost:3050/C:\BANCOSLPH\HOTEL.FDB?lc_ctype=UTF8</property>
+		<property name="hibernate.connection.username">sysdba</property>
+		<property name="hibernate.connection.password">masterkey</property>
+	 -->	<!-- C3P0 -->
+
+		<property name="hibernate.connection.provider_class">org.hibernate.service.jdbc.connections.internal.C3P0ConnectionProvider</property>
+		<property name="hibernate.c3p0.max_size">10</property>
+		<property name="hibernate.c3p0.min_size">1</property>
+		<!-- checkoutTimeout mits how long a client will wait for a Connection, 
+			if all Connections are checked out and one cannot be supplied immediately. 
+			In milliseconds. http://www.mchange.com/projects/c3p0/#checkoutTimeout -->
+		<property name="hibernate.c3p0.checkoutTimeout">1000000</property>
+		<property name="hibernate.c3p0.acquire_increment">1</property>
+		<property name="hibernate.c3p0.idle_test_period">100</property>
+		<property name="hibernate.c3p0.preferredTestQuery">select 1</property>
+
+		<!-- Disable second-level cache. -->
+		<property name="cache.provider_class">org.hibernate.cache.NoCacheProvider</property>
+		<property name="cache.use_query_cache">false</property>
+		<property name="cache.use_minimal_puts">false</property>
+		<property name="max_fetch_depth">3</property>
+		<property name="hibernate.current_session_context_class">thread</property>
+
+		<property name="hibernate.connection.autocommit">true</property>
+		
+
+	   
+	</session-factory>
+</hibernate-configuration>

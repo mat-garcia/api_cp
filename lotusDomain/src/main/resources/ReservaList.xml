@@ -1,0 +1,33 @@
+<S:Envelope xmlns:S="http://schemas.xmlsoap.org/soap/envelope/">
+	<S:Header>
+		<con:OmnibeesCredentials xmlns:con="http://connectors.omnibees.com/">
+			<con:UserCode>LotusBrasil</con:UserCode>
+			<con:UserName>12173</con:UserName>
+			<con:UserPassword>user.12173</con:UserPassword>
+		</con:OmnibeesCredentials>
+	</S:Header>
+	<S:Body>
+		<OTA_NotifReportRQ xmlns="http://www.opentravel.org/OTA/2003/05"
+			xmlns:ns2="http://connectors.omnibees.com/" EchoToken="93a77858-7fd3-423a-b4fd-f9eb537d5792"
+			Version="3">
+			<NotifDetails>
+				<HotelNotifReport>
+					<HotelReservations>
+						<HotelReservation>
+							<UniqueID ID="1" Type="Other" />
+							<ResGlobalInfo>
+								<HotelReservationIDs>
+									<HotelReservationID ResID_Source="PMS"
+										ResID_Type="Reservation" ResID_Value="TESTE123" />
+									<HotelReservationID ResID_Source="Omnibees"
+										ResID_Type="Reservation" ResID_Value="232002" />
+								</HotelReservationIDs>
+							</ResGlobalInfo>
+						</HotelReservation>
+					</HotelReservations>
+				</HotelNotifReport>
+			</NotifDetails>
+			<UniqueID ID="12173" Type="Hotel" />
+		</OTA_NotifReportRQ>
+	</S:Body>
+</S:Envelope>

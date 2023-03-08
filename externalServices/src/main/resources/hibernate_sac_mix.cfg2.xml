@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+		"-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+		"http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+	<session-factory>
+		<property name="hibernate.connection.driver_class">oracle.jdbc.driver.OracleDriver</property>
+		<property name="hibernate.dialect">org.hibernate.dialect.Oracle10gDialect</property>
+
+		<property name="hibernate.show_sql">false</property>
+		<property name="hibernate.format_sql">false</property>
+
+		<!-- Disable second-level cache. -->
+		 <property name="hibernate.connection.provider_class">org.hibernate.service.jdbc.connections.internal.C3P0ConnectionProvider</property>
+		<property name="hibernate.c3p0.max_size">1</property>
+		<property name="hibernate.c3p0.min_size">1</property>
+		<property name="hibernate.c3p0.checkoutTimeout">1000000</property>
+		<property name="hibernate.c3p0.acquire_increment">1</property>
+		<property name="hibernate.c3p0.idle_test_period">100</property>
+		<property name="hibernate.c3p0.preferredTestQuery">select 1 from dual</property>
+		<property name="hibernate.current_session_context_class">thread</property>
+
+		<!-- <property name="hibernate.hbm2ddl.auto">update</property> -->
+
+		<property name="hibernate.connection.autocommit">false</property>
+		<!-- <property name="hibernate.connection.release_mode">after_statement</property> -->
+
+		<!-- TABELAS / ENTIDADES -->
+		<mapping class="br.com.hdnit.lotus.pms.cm.entity.oracle.Cidades" />
+		<mapping class="br.com.hdnit.lotus.pms.cm.entity.oracle.Clientepess" />
+		<mapping class="br.com.hdnit.lotus.pms.cm.entity.oracle.Contasfront" />
+
+
+		<mapping class="br.com.hdnit.lotus.pms.cm.entity.oracle.Tarifahotel" />
+		<mapping class="br.com.hdnit.lotus.pms.cm.entity.oracle.Movimentohospedes" />
+		<mapping class="br.com.hdnit.lotus.pms.cm.entity.oracle.Reservasfront" />
+		<mapping class="br.com.hdnit.lotus.pms.cm.entity.oracle.Telendpess" />
+		<mapping class="br.com.hdnit.lotus.pms.cm.entity.oracle.Paramhotel" />
+
+		<mapping class="br.com.hdnit.lotus.pms.cm.entity.oracle.Tipouh" />
+
+		<mapping class="br.com.hdnit.lotus.pms.cm.entity.oracle.Usuariosistema" />
+
+		<mapping class="br.com.hdnit.lotus.pms.cm.entity.oracle.Reservasideas" />
+
+		<mapping class="br.com.hdnit.lotus.pms.cm.entity.oracle.Contrclihotel" />
+
+		<mapping class="br.com.hdnit.lotus.pms.cm.entity.oracle.Moeda" />
+
+		<mapping class="br.com.hdnit.lotus.pms.cm.entity.oracle.Faixaetaria" />
+
+		<mapping class="br.com.hdnit.lotus.pms.cm.entity.oracle.Segmento" />
+
+		<mapping class="br.com.hdnit.lotus.pms.cm.entity.oracle.Meioscomunicacao" />
+
+		<mapping class="br.com.hdnit.lotus.pms.cm.entity.oracle.Orcamentoreserva" />
+
+		<mapping class="br.com.hdnit.lotus.pms.cm.entity.oracle.Statusreserva" />
+
+		<mapping class="br.com.hdnit.lotus.pms.cm.entity.oracle.Motivosfront" />
+
+		<mapping class="br.com.hdnit.lotus.pms.cm.entity.oracle.Hotel" />
+
+		<mapping class="br.com.hdnit.lotus.pms.cm.entity.oracle.Origemreserva" />
+
+		<mapping class="br.com.hdnit.lotus.pms.cm.entity.oracle.Docconfirmahotel" />
+		<mapping class="br.com.hdnit.lotus.pms.cm.entity.oracle.Veiculoscomunica" />
+
+		<mapping class="br.com.hdnit.lotus.pms.cm.entity.oracle.Tratamento" />
+
+		<mapping class="br.com.hdnit.lotus.pms.cm.entity.oracle.Hospedexhotel" />
+
+
+
+
+
+
+
+		<mapping class="br.com.hdnit.lotus.pms.cm.entity.oracle.Fidelidaderesvhf" />
+
+		<mapping class="br.com.hdnit.lotus.pms.cm.entity.oracle.Pensaofront" />
+		<mapping class="br.com.hdnit.lotus.pms.cm.entity.oracle.Endpess" />
+
+		<mapping class="br.com.hdnit.lotus.pms.cm.entity.oracle.Reservareduz" />
+
+		<mapping class="br.com.hdnit.lotus.pms.cm.entity.oracle.Hospede" />
+
+		<mapping class="br.com.hdnit.lotus.pms.cm.entity.oracle.Movimentohospedes" />
+
+
+		<mapping class="br.com.hdnit.lotus.pms.cm.entity.oracle.Pessoa" />
+
+		<mapping class="br.com.hdnit.lotus.pms.cm.entity.oracle.Tipohospede" />
+
+
+	</session-factory>
+
+
+
+</hibernate-configuration>

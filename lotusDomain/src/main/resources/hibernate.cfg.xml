@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+		"-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+		"http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+	<session-factory>
+		<property name="hibernate.dialect">org.hibernate.dialect.MySQL5InnoDBDialect</property>
+		<property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+
+<!-- 		<property name="hibernate.show_sql">true</property>
+		<property name="hibernate.format_sql">true</property>
+ -->
+
+		<!-- BANCO DEV JELASTIC IP_PUBLICO (USAR ESSE PARA ACESSO EXTERNO) -->
+
+		<!-- C3P0 -->
+		<property name="hibernate.temp.use_jdbc_metadata_defaults">false</property>
+		<property name="hibernate.connection.provider_class">org.hibernate.service.jdbc.connections.internal.C3P0ConnectionProvider</property>
+		<property name="hibernate.c3p0.max_size">3</property>
+		<property name="hibernate.c3p0.min_size">3</property>
+		<!-- checkoutTimeout mits how long a client will wait for a Connection, 
+			if all Connections are checked out and one cannot be supplied immediately. 
+			In milliseconds. http://www.mchange.com/projects/c3p0/#checkoutTimeout -->
+		<property name="hibernate.c3p0.checkoutTimeout">1000000</property>
+		<property name="hibernate.c3p0.acquire_increment">1</property>
+		<property name="hibernate.c3p0.idle_test_period">100</property>
+		<property name="hibernate.c3p0.preferredTestQuery">select 1</property>
+
+
+		<!-- Disable second-level cache. -->
+		<property name="cache.provider_class">org.hibernate.cache.NoCacheProvider</property>
+		<property name="cache.use_query_cache">false</property>
+		<property name="cache.use_minimal_puts">false</property>
+		<property name="max_fetch_depth">3</property>
+
+		<property name="hibernate.current_session_context_class">thread</property>
+
+		<property name="hibernate.hbm2ddl.auto">update</property>
+		<property name="hibernate.connection.autocommit">false</property>
+		<!-- <property name="hibernate.connection.release_mode">after_statement</property> -->
+		<!-- TABELAS / ENTIDADES -->
+
+		<mapping class="br.com.hdnit.lotus.domain.entity.corporativo.Empresa" />
+
+		<mapping class="br.com.hdnit.lotus.domain.entity.corporativo.Parceiro" />
+
+		<mapping class="br.com.hdnit.lotus.domain.entity.corporativo.ErrorLog" />
+		
+		<mapping class="br.com.hdnit.lotus.domain.entity.corporativo.TipoPensaoParceiro" />
+
+		<mapping class="br.com.hdnit.lotus.domain.entity.corporativo.Canal" />
+		<mapping class="br.com.hdnit.lotus.domain.entity.corporativo.TipoUhParceiro" />
+		<mapping class="br.com.hdnit.lotus.domain.entity.corporativo.MoedaParceiro" />
+		<mapping class="br.com.hdnit.lotus.domain.entity.corporativo.Reserva" />
+		<mapping class="br.com.hdnit.lotus.domain.entity.corporativo.ReservaItem" />
+		<mapping class="br.com.hdnit.lotus.domain.entity.corporativo.ReservaHospede" />
+		<mapping class="br.com.hdnit.lotus.domain.entity.corporativo.TipoPagamentoParceiro" />
+		<mapping
+			class="br.com.hdnit.lotus.domain.entity.corporativo.ReservaItemValor" />
+		<mapping
+			class="br.com.hdnit.lotus.domain.entity.corporativo.ReservaItemLancamento" />
+	
+		<mapping class="br.com.hdnit.lotus.domain.entity.corporativo.CanalHotel" />
+
+		<mapping class="br.com.hdnit.lotus.domain.entity.access.Permission" />
+		<mapping class="br.com.hdnit.lotus.domain.entity.access.Profile" />
+		<mapping class="br.com.hdnit.lotus.domain.entity.access.Usuario" />
+		<mapping class="br.com.hdnit.lotus.domain.entity.access.LoginCount" />
+		<mapping class="br.com.hdnit.lotus.domain.entity.access.LoggedStatus" />
+
+		<mapping class="br.com.hdnit.lotus.domain.entity.access.BlockedUser" />
+
+		<mapping class="br.com.hdnit.lotus.domain.entity.config.CidadeConfig" />
+		<mapping
+			class="br.com.hdnit.lotus.domain.entity.config.DocconfirmahotelConfig" />
+		<mapping class="br.com.hdnit.lotus.domain.entity.config.FaixaEtariaConfig" />
+		<mapping class="br.com.hdnit.lotus.domain.entity.config.MeiosComuniConfig" />
+		<mapping class="br.com.hdnit.lotus.domain.entity.config.MoedaConfig" />
+		<mapping class="br.com.hdnit.lotus.domain.entity.config.MotivoFrontConfig" />
+		<mapping class="br.com.hdnit.lotus.domain.entity.config.OrigemReservaConfig" />
+		<mapping class="br.com.hdnit.lotus.domain.entity.config.PensaoConfig" />
+		<mapping class="br.com.hdnit.lotus.domain.entity.config.PessoaConfig" />
+		<mapping class="br.com.hdnit.lotus.domain.entity.config.SegmentoConfig" />
+		<mapping class="br.com.hdnit.lotus.domain.entity.config.TarifaConfig" />
+		<mapping class="br.com.hdnit.lotus.domain.entity.config.TipoHospedeConfig" />
+		<mapping class="br.com.hdnit.lotus.domain.entity.config.TipoUhConfig" />
+		<mapping class="br.com.hdnit.lotus.domain.entity.config.TratamentoConfig" />
+		<mapping
+			class="br.com.hdnit.lotus.domain.entity.config.UsuariosistemaConfig" />
+		<mapping class="br.com.hdnit.lotus.domain.entity.config.VeiculocomuniConfig" />
+		<mapping class="br.com.hdnit.lotus.domain.entity.config.TipoDebitoConfig" />
+		<mapping class="br.com.hdnit.lotus.domain.entity.config.TipoDebitoConfigEmpresa" />
+	
+					
+
+
+		<mapping class="br.com.hdnit.lotus.domain.entity.config.TipoServicoConfig" />
+		<mapping class="br.com.hdnit.lotus.domain.entity.config.TipoDocPessoaConfig" />
+
+
+
+		<listener class="org.hibernate.envers.event.AuditEventListener"
+			type="post-insert" />
+		<listener class="org.hibernate.envers.event.AuditEventListener"
+			type="post-update" />
+		<listener class="org.hibernate.envers.event.AuditEventListener"
+			type="post-delete" />
+		<listener class="org.hibernate.envers.event.AuditEventListener"
+			type="pre-collection-update" />
+		<listener class="org.hibernate.envers.event.AuditEventListener"
+			type="pre-collection-remove" />
+		<listener class="org.hibernate.envers.event.AuditEventListener"
+			type="post-collection-recreate" />
+	</session-factory>
+
+
+
+</hibernate-configuration>

@@ -1,0 +1,285 @@
+log4j: Threshold ="null".
+log4j: Level value for root is  [INFO].
+log4j: root level set to INFO
+log4j: Class name: [org.apache.log4j.ConsoleAppender]
+log4j: Parsing layout of class: "org.apache.log4j.PatternLayout"
+log4j: Setting property [conversionPattern] to [%d{dd MMM yyyy HH:mm:ss} %5p %c{1} - %m%n].
+log4j: Adding appender named [consoleAppender] to category [root].
+log4j: Class name: [org.apache.log4j.RollingFileAppender]
+log4j: Setting property [append] to [false].
+log4j: Setting property [file] to [/home/hdn/Documentos/Projetos_java/gpline/gpLineWS/logs.log].
+log4j: Setting property [maxBackupIndex] to [100].
+log4j: Setting property [maxFileSize] to [4mb].
+log4j: Parsing layout of class: "org.apache.log4j.PatternLayout"
+log4j: Setting property [conversionPattern] to [%d{ABSOLUTE} %-5p [%c{1}] %m%n].
+log4j: setFile called: /home/hdn/Documentos/Projetos_java/gpline/gpLineWS/logs.log, false
+log4j: Adding appender named [fileAppender] to category [root].
+log4j:ERROR setFile(null,false) call failed.
+java.io.FileNotFoundException: /home/hdn/Documentos/Projetos_java/gpline/gpLineWS/logs.log (No such file or directory)
+	at java.io.FileOutputStream.open(Native Method)
+	at java.io.FileOutputStream.<init>(FileOutputStream.java:212)
+	at java.io.FileOutputStream.<init>(FileOutputStream.java:136)
+	at org.apache.log4j.FileAppender.setFile(FileAppender.java:289)
+	at org.apache.log4j.RollingFileAppender.setFile(RollingFileAppender.java:167)
+	at org.apache.log4j.FileAppender.activateOptions(FileAppender.java:163)
+	at org.apache.log4j.config.PropertySetter.activate(PropertySetter.java:256)
+	at org.apache.log4j.xml.DOMConfigurator.parseAppender(DOMConfigurator.java:220)
+	at org.apache.log4j.xml.DOMConfigurator.findAppenderByName(DOMConfigurator.java:150)
+	at org.apache.log4j.xml.DOMConfigurator.findAppenderByReference(DOMConfigurator.java:163)
+	at org.apache.log4j.xml.DOMConfigurator.parseChildrenOfLoggerElement(DOMConfigurator.java:425)
+	at org.apache.log4j.xml.DOMConfigurator.parseRoot(DOMConfigurator.java:394)
+	at org.apache.log4j.xml.DOMConfigurator.parse(DOMConfigurator.java:829)
+	at org.apache.log4j.xml.DOMConfigurator.doConfigure(DOMConfigurator.java:712)
+	at org.apache.log4j.xml.DOMConfigurator.doConfigure(DOMConfigurator.java:618)
+	at org.apache.log4j.helpers.OptionConverter.selectAndConfigure(OptionConverter.java:470)
+	at org.apache.log4j.LogManager.<clinit>(LogManager.java:122)
+	at org.apache.log4j.Logger.getLogger(Logger.java:117)
+	at br.com.hdntecnologia.sanconrado.domain.process.SanConradoXLSLoader.<clinit>(SanConradoXLSLoader.java:53)
+03 Set 2015 00:08:26  INFO Version - HCANN000001: Hibernate Commons Annotations {4.0.5.Final}
+03 Set 2015 00:08:26  INFO Version - HHH000412: Hibernate Core {4.3.6.Final}
+03 Set 2015 00:08:26  INFO Environment - HHH000206: hibernate.properties not found
+03 Set 2015 00:08:26  INFO Environment - HHH000021: Bytecode provider name : javassist
+03 Set 2015 00:08:26  INFO Configuration - HHH000043: Configuring from resource: /hibernate.cfg.xml
+03 Set 2015 00:08:26  INFO Configuration - HHH000040: Configuration resource: /hibernate.cfg.xml
+03 Set 2015 00:08:26  INFO Configuration - HHH000041: Configured SessionFactory: null
+03 Set 2015 00:08:26  INFO ConnectionProviderInitiator - HHH000130: Instantiating explicit connection provider: org.hibernate.service.jdbc.connections.internal.C3P0ConnectionProvider
+03 Set 2015 00:08:26  INFO C3P0ConnectionProvider - HHH010002: C3P0 using driver: com.mysql.jdbc.Driver at URL: jdbc:mysql://191.252.52.66:3306/sanconrado_prod?zeroDateTimeBehavior=convertToNull
+03 Set 2015 00:08:26  INFO C3P0ConnectionProvider - HHH000046: Connection properties: {user=sanconrado_prod, password=****, autocommit=true, release_mode=after_statement}
+03 Set 2015 00:08:26  INFO C3P0ConnectionProvider - HHH000006: Autocommit mode: true
+03 Set 2015 00:08:26  INFO MLog - MLog clients using log4j logging.
+03 Set 2015 00:08:26  INFO C3P0Registry - Initializing c3p0-0.9.2.1 [built 20-March-2013 10:47:27 +0000; debug? true; trace: 10]
+03 Set 2015 00:08:26  INFO AbstractPoolBackedDataSource - Initializing c3p0 pool... com.mchange.v2.c3p0.PoolBackedDataSource@63745287 [ connectionPoolDataSource -> com.mchange.v2.c3p0.WrapperConnectionPoolDataSource@d32d52fe [ acquireIncrement -> 1, acquireRetryAttempts -> 30, acquireRetryDelay -> 1000, autoCommitOnClose -> false, automaticTestTable -> null, breakAfterAcquireFailure -> false, checkoutTimeout -> 1000000, connectionCustomizerClassName -> null, connectionTesterClassName -> com.mchange.v2.c3p0.impl.DefaultConnectionTester, debugUnreturnedConnectionStackTraces -> false, factoryClassLocation -> null, forceIgnoreUnresolvedTransactions -> false, identityToken -> 1hge15z9b14a4p481qfz1k6|4afe268a, idleConnectionTestPeriod -> 100, initialPoolSize -> 1, maxAdministrativeTaskTime -> 0, maxConnectionAge -> 0, maxIdleTime -> 0, maxIdleTimeExcessConnections -> 0, maxPoolSize -> 2, maxStatements -> 0, maxStatementsPerConnection -> 0, minPoolSize -> 1, nestedDataSource -> com.mchange.v2.c3p0.DriverManagerDataSource@a3a73c4e [ description -> null, driverClass -> null, factoryClassLocation -> null, identityToken -> 1hge15z9b14a4p481qfz1k6|27736f80, jdbcUrl -> jdbc:mysql://191.252.52.66:3306/sanconrado_prod?zeroDateTimeBehavior=convertToNull, properties -> {user=******, password=******, autocommit=true, release_mode=after_statement} ], preferredTestQuery -> select 1, propertyCycle -> 0, statementCacheNumDeferredCloseThreads -> 0, testConnectionOnCheckin -> false, testConnectionOnCheckout -> false, unreturnedConnectionTimeout -> 0, usesTraditionalReflectiveProxies -> false; userOverrides: {} ], dataSourceName -> null, factoryClassLocation -> null, identityToken -> 1hge15z9b14a4p481qfz1k6|3b114c4f, numHelperThreads -> 3 ]
+03 Set 2015 00:08:27  INFO Dialect - HHH000400: Using dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+03 Set 2015 00:08:27  INFO LobCreatorBuilder - HHH000423: Disabling contextual LOB creation as JDBC driver reported JDBC version [3] less than 4
+03 Set 2015 00:08:27  WARN AnnotationBinder - HHH000457: Joined inheritance hierarchy [br.com.hdnit.lotus.domain.entity.corporativo.Pessoa] defined explicit @DiscriminatorColumn.  Legacy Hibernate behavior was to ignore the @DiscriminatorColumn.  However, as part of issue HHH-6911 we now apply the explicit @DiscriminatorColumn.  If you would prefer the legacy behavior, enable the `hibernate.discriminator.ignore_explicit_for_joined` setting (hibernate.discriminator.ignore_explicit_for_joined=true)
+03 Set 2015 00:08:27  WARN AnnotationBinder - HHH000137: Root entity should not hold an PrimaryKeyJoinColum(s), will be ignored
+03 Set 2015 00:08:27  WARN SettingsFactory - HHH000390: Overriding release mode as connection provider does not support 'after_statement'
+03 Set 2015 00:08:27  INFO ASTQueryTranslatorFactory - HHH000397: Using ASTQueryTranslatorFactory
+03 Set 2015 00:08:28  INFO Version - HV000001: Hibernate Validator 4.3.2.Final
+03 Set 2015 00:08:29  INFO SchemaUpdate - HHH000228: Running hbm2ddl schema update
+03 Set 2015 00:08:29  INFO SchemaUpdate - HHH000102: Fetching database metadata
+03 Set 2015 00:08:29  INFO SchemaUpdate - HHH000396: Updating schema
+03 Set 2015 00:08:29  INFO TableMetadata - HHH000261: Table found: sanconrado_prod.AC_blocked_user
+03 Set 2015 00:08:29  INFO TableMetadata - HHH000037: Columns: [data_alteracao, id_user, ativo, id_logincount, data_inclusao, id_usuario_inclusao, id_usuario_alteracao, num_count, id_empresa]
+03 Set 2015 00:08:29  INFO TableMetadata - HHH000108: Foreign keys: [fk_n2lrcg4v9wxdtss78g2y99ls2, fk_jfn2wd102ybum5fj8pwcos968, fk_b1a86ecq2eutcw674hhavvgci, fk_5dab8vj0cpl5civh69t0mnh70]
+03 Set 2015 00:08:29  INFO TableMetadata - HHH000126: Indexes: [fk_n2lrcg4v9wxdtss78g2y99ls2, fk_jfn2wd102ybum5fj8pwcos968, primary, fk_b1a86ecq2eutcw674hhavvgci, fk_5dab8vj0cpl5civh69t0mnh70]
+03 Set 2015 00:08:29  INFO TableMetadata - HHH000261: Table found: sanconrado_prod.AC_loggedStatus
+03 Set 2015 00:08:29  INFO TableMetadata - HHH000037: Columns: [id_user, dt_lasttime, nm_sessionkey, id_logincount, bool_logged]
+03 Set 2015 00:08:29  INFO TableMetadata - HHH000108: Foreign keys: [fk_3g4vq6ql21wma5udusp4jt5yl]
+03 Set 2015 00:08:29  INFO TableMetadata - HHH000126: Indexes: [fk_3g4vq6ql21wma5udusp4jt5yl, primary]
+03 Set 2015 00:08:29  INFO TableMetadata - HHH000261: Table found: sanconrado_prod.AC_loginCount
+03 Set 2015 00:08:29  INFO TableMetadata - HHH000037: Columns: [id_user, id_logincount, num_count]
+03 Set 2015 00:08:29  INFO TableMetadata - HHH000108: Foreign keys: [fk_g9la9b6u3van108v04eatd4gr]
+03 Set 2015 00:08:29  INFO TableMetadata - HHH000126: Indexes: [primary, fk_g9la9b6u3van108v04eatd4gr]
+03 Set 2015 00:08:29  INFO TableMetadata - HHH000261: Table found: sanconrado_prod.AC_permission
+03 Set 2015 00:08:29  INFO TableMetadata - HHH000037: Columns: [grupo, data_alteracao, nm_permission, ativo, id_permission, data_inclusao, id_usuario_inclusao, id_usuario_alteracao, nm_url, ds_permission, id_empresa]
+03 Set 2015 00:08:29  INFO TableMetadata - HHH000108: Foreign keys: [fk_326b8670rxuiv7lq7jy5ubu82, fk_gi0iv7r504231glybqfn8i1it, fk_hj6dnimhc1aeaxcfxrh7m5amr]
+03 Set 2015 00:08:29  INFO TableMetadata - HHH000126: Indexes: [fk_326b8670rxuiv7lq7jy5ubu82, fk_gi0iv7r504231glybqfn8i1it, primary, fk_hj6dnimhc1aeaxcfxrh7m5amr]
+03 Set 2015 00:08:29  INFO TableMetadata - HHH000261: Table found: sanconrado_prod.AC_profile
+03 Set 2015 00:08:29  INFO TableMetadata - HHH000037: Columns: [data_alteracao, nm_profile, ativo, data_inclusao, ds_profile, id_usuario_inclusao, id_usuario_alteracao, id_profile, id_empresa]
+03 Set 2015 00:08:29  INFO TableMetadata - HHH000108: Foreign keys: [fk_5c8nt1omrpxtktik4ajps88l, fk_sq6wrnx12weki4r5te85jgims, fk_qy4r0y2woqsgv6iy6ag4nlbf4]
+03 Set 2015 00:08:29  INFO TableMetadata - HHH000126: Indexes: [primary, fk_5c8nt1omrpxtktik4ajps88l, fk_sq6wrnx12weki4r5te85jgims, fk_qy4r0y2woqsgv6iy6ag4nlbf4]
+03 Set 2015 00:08:30  INFO TableMetadata - HHH000261: Table found: sanconrado_prod.AC_profile_AC_permission
+03 Set 2015 00:08:30  INFO TableMetadata - HHH000037: Columns: [permissions_id_permission, ac_profile_id_profile]
+03 Set 2015 00:08:30  INFO TableMetadata - HHH000108: Foreign keys: [fk_hiyfoj2q3nraw14oemremq7jl, fk_ih3i2aioipktcu2inkx5mu34m]
+03 Set 2015 00:08:30  INFO TableMetadata - HHH000126: Indexes: [fk_hiyfoj2q3nraw14oemremq7jl, fk_ih3i2aioipktcu2inkx5mu34m]
+03 Set 2015 00:08:30  INFO TableMetadata - HHH000261: Table found: sanconrado_prod.AC_user
+03 Set 2015 00:08:30  INFO TableMetadata - HHH000037: Columns: [nm_user_email, nm_userpassword_passhash, status_usuario, data_inclusao, bl_super_admin, id, data_alteracao, nr_numero_celular, nm_user, ativo, id_user_profile, nr_cpf, nm_insert_key, id_usuario_inclusao, id_usuario_alteracao, id_empresa, nm_user_nick]
+03 Set 2015 00:08:30  INFO TableMetadata - HHH000108: Foreign keys: [fk_7j3ru27eq6mxpg06pb020ob5b, fk_l2byojyyn3ygtbms2rmjqucxp, fk_i1r1rtd3figotjl8iux0jw5yu, fk_gaqj3wgfa9l5991wpwship7gx]
+03 Set 2015 00:08:30  INFO TableMetadata - HHH000126: Indexes: [fk_7j3ru27eq6mxpg06pb020ob5b, primary, fk_l2byojyyn3ygtbms2rmjqucxp, uk_76eqejmgiywwd43evd5m83bd, fk_i1r1rtd3figotjl8iux0jw5yu, fk_gaqj3wgfa9l5991wpwship7gx]
+03 Set 2015 00:08:30  INFO TableMetadata - HHH000261: Table found: sanconrado_prod.bairro
+03 Set 2015 00:08:30  INFO TableMetadata - HHH000037: Columns: [id, data_alteracao, id_cidade, ativo, data_inclusao, nome, id_usuario_inclusao, id_usuario_alteracao, id_empresa]
+03 Set 2015 00:08:30  INFO TableMetadata - HHH000108: Foreign keys: [fk_mhjwd429m3og8k2hay4gq0uxe, fk_one1sm5wy0j0yhftny3ycqrxh, fk_mtdblik8i0ifhghpsy7xs3vp6, fk_dwxrdwmk9pkmlppxk237dc8a0]
+03 Set 2015 00:08:30  INFO TableMetadata - HHH000126: Indexes: [fk_mhjwd429m3og8k2hay4gq0uxe, fk_one1sm5wy0j0yhftny3ycqrxh, primary, fk_mtdblik8i0ifhghpsy7xs3vp6, fk_dwxrdwmk9pkmlppxk237dc8a0]
+03 Set 2015 00:08:30  INFO TableMetadata - HHH000261: Table found: sanconrado_prod.cartao
+03 Set 2015 00:08:30  INFO TableMetadata - HHH000037: Columns: [codigo_cartao, id, data_alteracao, tp_cartao, ativo, data_inclusao, id_usuario_inclusao, id_usuario_alteracao, descricao, id_empresa]
+03 Set 2015 00:08:30  INFO TableMetadata - HHH000108: Foreign keys: [fk_8e9ku2jyreuk4wilwucfmmum2, fk_3m07clx0cxn35enbiq9cgew8, fk_6c7ki9juj4eeorfe1gwbif8ri]
+03 Set 2015 00:08:30  INFO TableMetadata - HHH000126: Indexes: [fk_8e9ku2jyreuk4wilwucfmmum2, primary, fk_3m07clx0cxn35enbiq9cgew8, uk_qlij3py4gv3a51qn3emr8pi4i, fk_6c7ki9juj4eeorfe1gwbif8ri]
+03 Set 2015 00:08:30  INFO TableMetadata - HHH000261: Table found: sanconrado_prod.cep
+03 Set 2015 00:08:30  INFO TableMetadata - HHH000037: Columns: [id_bairro, id_cidade, data_inclusao, logradouro_abreviado, id, data_alteracao, cep, ativo, logradouro, id_usuario_alteracao, id_usuario_inclusao, tipo_logradouro, id_empresa]
+03 Set 2015 00:08:30  INFO TableMetadata - HHH000108: Foreign keys: [fk_ri0guxw6bd4y8g2tvjj43twl6, fk_5v9kvq7faqu1j4ncuylj7w6sw, fk_ob038jhqxl20o4qwxlxtf9um9, fk_2ei58ppbod7n13i7dx2a03nr3, fk_ngb0fwjka2q5fr4f3rsjngggv]
+03 Set 2015 00:08:30  INFO TableMetadata - HHH000126: Indexes: [fk_ri0guxw6bd4y8g2tvjj43twl6, fk_5v9kvq7faqu1j4ncuylj7w6sw, fk_ob038jhqxl20o4qwxlxtf9um9, primary, fk_2ei58ppbod7n13i7dx2a03nr3, fk_ngb0fwjka2q5fr4f3rsjngggv]
+03 Set 2015 00:08:30  INFO TableMetadata - HHH000261: Table found: sanconrado_prod.cidade
+03 Set 2015 00:08:30  INFO TableMetadata - HHH000037: Columns: [id, data_alteracao, ativo, data_inclusao, nome, id_usuario_inclusao, id_usuario_alteracao, id_estado, id_empresa]
+03 Set 2015 00:08:30  INFO TableMetadata - HHH000108: Foreign keys: [fk_fplmd3tmrwxq1xev8ynd2xsgk, fk_kqtptqexyn43e1xpitvj5rx33, fk_q54s3fekwspadc0bss91u7sn5, fk_5hol003ldokg3ijxk1myhxc3p]
+03 Set 2015 00:08:30  INFO TableMetadata - HHH000126: Indexes: [fk_fplmd3tmrwxq1xev8ynd2xsgk, fk_kqtptqexyn43e1xpitvj5rx33, fk_q54s3fekwspadc0bss91u7sn5, primary, fk_5hol003ldokg3ijxk1myhxc3p]
+03 Set 2015 00:08:30  INFO TableMetadata - HHH000261: Table found: sanconrado_prod.email
+03 Set 2015 00:08:30  INFO TableMetadata - HHH000037: Columns: [id, tipoemail, data_alteracao, email, ativo, data_inclusao, id_usuario_inclusao, id_usuario_alteracao, id_pessoa, id_empresa]
+03 Set 2015 00:08:30  INFO TableMetadata - HHH000108: Foreign keys: [fk_q77uhes1ysog59j4j3ibesvxk, fk_kd5ccac8sxh00iv8264f622hv, fk_2lynl1qk2l2vlyciohhoehcfa, fk_a8eewvtecvexr5w4umm4nwwck]
+03 Set 2015 00:08:30  INFO TableMetadata - HHH000126: Indexes: [primary, fk_q77uhes1ysog59j4j3ibesvxk, fk_kd5ccac8sxh00iv8264f622hv, fk_2lynl1qk2l2vlyciohhoehcfa, fk_a8eewvtecvexr5w4umm4nwwck]
+03 Set 2015 00:08:30  INFO TableMetadata - HHH000261: Table found: sanconrado_prod.empresa
+03 Set 2015 00:08:30  INFO TableMetadata - HHH000037: Columns: [id, quant_estabelecimento, data_alteracao, valor, volume_vendasabstract, ativo, data_inclusao, id_usuario_inclusao, id_usuario_alteracao, id_pessoa, id_empresa_pai, id_empresa]
+03 Set 2015 00:08:30  INFO TableMetadata - HHH000108: Foreign keys: [fk_pd7a5vjy6bdjcckq34p4r8bl0, fk_g148qha60fhgnx9fdkcb0mov4, fk_cbvbcc80rawvs5yyy7scink5n, fk_3leo03y5xx0mm3fgif6hq69kw, fk_puwv9f771ctn9fhg6e8rj0qjv]
+03 Set 2015 00:08:30  INFO TableMetadata - HHH000126: Indexes: [fk_pd7a5vjy6bdjcckq34p4r8bl0, fk_g148qha60fhgnx9fdkcb0mov4, fk_cbvbcc80rawvs5yyy7scink5n, fk_3leo03y5xx0mm3fgif6hq69kw, primary, fk_puwv9f771ctn9fhg6e8rj0qjv]
+03 Set 2015 00:08:30  INFO TableMetadata - HHH000261: Table found: sanconrado_prod.empresa_permissao
+03 Set 2015 00:08:30  INFO TableMetadata - HHH000037: Columns: [permission_id, empresa_id]
+03 Set 2015 00:08:30  INFO TableMetadata - HHH000108: Foreign keys: [fk_8qlm2jxfjm9ins9smkc75l9dj, fk_7tul5qo6tksqkv99vwc377s20]
+03 Set 2015 00:08:30  INFO TableMetadata - HHH000126: Indexes: [fk_8qlm2jxfjm9ins9smkc75l9dj, primary]
+03 Set 2015 00:08:31  INFO TableMetadata - HHH000261: Table found: sanconrado_prod.endereco
+03 Set 2015 00:08:31  INFO TableMetadata - HHH000037: Columns: [complemento, data_inclusao, tipoendereco, numero, id, data_alteracao, bairro, cidade, cep, estado, ativo, logradouro, id_usuario_inclusao, id_usuario_alteracao, id_pessoa, id_cep, id_empresa]
+03 Set 2015 00:08:31  INFO TableMetadata - HHH000108: Foreign keys: [fk_s8j19iit973h3hk2le2r5og1n, fk_ru43g9i1cex5fmmvohrhc8jmh, fk_dgej0p6s5tkmu1rlh7qiogia1, fk_k3890hs6pveba6607m1fdrdcy, fk_a9hq55ityywg3yc2s5j5hrjkb]
+03 Set 2015 00:08:31  INFO TableMetadata - HHH000126: Indexes: [fk_s8j19iit973h3hk2le2r5og1n, fk_ru43g9i1cex5fmmvohrhc8jmh, fk_dgej0p6s5tkmu1rlh7qiogia1, primary, fk_k3890hs6pveba6607m1fdrdcy, fk_a9hq55ityywg3yc2s5j5hrjkb]
+03 Set 2015 00:08:31  INFO TableMetadata - HHH000261: Table found: sanconrado_prod.estado
+03 Set 2015 00:08:31  INFO TableMetadata - HHH000037: Columns: [id, data_alteracao, id_pais, sigla, ativo, data_inclusao, nome, id_usuario_inclusao, id_usuario_alteracao, id_empresa]
+03 Set 2015 00:08:31  INFO TableMetadata - HHH000108: Foreign keys: [fk_ahe5nfp6b6kjao373uojfeeql, fk_plqrfwwwqj25j4sb5758qq9yl, fk_g5av19nhq4fpv6wjrapakdaag, fk_73tjmmkmp5fxe87483g8vsbge]
+03 Set 2015 00:08:31  INFO TableMetadata - HHH000126: Indexes: [fk_ahe5nfp6b6kjao373uojfeeql, primary, fk_plqrfwwwqj25j4sb5758qq9yl, fk_g5av19nhq4fpv6wjrapakdaag, fk_73tjmmkmp5fxe87483g8vsbge]
+03 Set 2015 00:08:31  INFO TableMetadata - HHH000261: Table found: sanconrado_prod.imovel
+03 Set 2015 00:08:31  INFO TableMetadata - HHH000037: Columns: [data_inclusao, tipo_terreno, id_endereco, bl_associado, matricula, id, caixa_postal_interna, data_alteracao, bl_cob_judicial, tipoimovel, ativo, id_usuario_inclusao, id_usuario_alteracao, id_empresa]
+03 Set 2015 00:08:31  INFO TableMetadata - HHH000108: Foreign keys: [fk_em1y88sm9kb0de7ko1eomj51a, fk_n2jpgnbid1vtuhoexpkigfssi, fk_j0j44xtfjymcmxl6w3dopr8jv, fk_p87eatxnne3fbv23gev09d0k1]
+03 Set 2015 00:08:31  INFO TableMetadata - HHH000126: Indexes: [fk_em1y88sm9kb0de7ko1eomj51a, fk_n2jpgnbid1vtuhoexpkigfssi, fk_j0j44xtfjymcmxl6w3dopr8jv, primary, fk_p87eatxnne3fbv23gev09d0k1]
+03 Set 2015 00:08:31  INFO TableMetadata - HHH000261: Table found: sanconrado_prod.imovel_historico
+03 Set 2015 00:08:31  INFO TableMetadata - HHH000037: Columns: [id, data_alteracao, ativo, data, data_inclusao, id_usuario_inclusao, id_usuario_alteracao, id_imovel, observacao, id_empresa]
+03 Set 2015 00:08:31  INFO TableMetadata - HHH000108: Foreign keys: [fk_lolhx1obxsrtquy0466kobgtb, fk_gl1stbruf8n0ef5grod1y81g7, fk_s9uqmbs80vkmrmwqp34q0uk3t, fk_5yokl152ffb6a9bx65d1y0a5y]
+03 Set 2015 00:08:31  INFO TableMetadata - HHH000126: Indexes: [fk_lolhx1obxsrtquy0466kobgtb, fk_gl1stbruf8n0ef5grod1y81g7, fk_s9uqmbs80vkmrmwqp34q0uk3t, primary, fk_5yokl152ffb6a9bx65d1y0a5y]
+03 Set 2015 00:08:31  INFO TableMetadata - HHH000261: Table found: sanconrado_prod.imovel_pessoa
+03 Set 2015 00:08:31  INFO TableMetadata - HHH000037: Columns: [dt_fim, id_sub_tipo_contato, data_inclusao, observacao, id_imovel, id, data_alteracao, ativo, id_tipo_contato, id_usuario_alteracao, id_usuario_inclusao, id_pessoa, dt_ini, id_empresa]
+03 Set 2015 00:08:31  INFO TableMetadata - HHH000108: Foreign keys: [fk_668crnibbclh1l96i66v06jsu, fk_lqyfrxhtjoc9v77ve8d08ahub, fk_ll4choar4263emqp2reg1245b, fk_q7lor498b3rxc6al5xb1qclk3, fk_dogb121ht48atqx9c90bnuarh, fk_q5dpd1j5y4d50aqguvp592bi, fk_63m2w3c0a0lb4evolsw7s7kch]
+03 Set 2015 00:08:31  INFO TableMetadata - HHH000126: Indexes: [fk_668crnibbclh1l96i66v06jsu, fk_ll4choar4263emqp2reg1245b, fk_lqyfrxhtjoc9v77ve8d08ahub, primary, fk_dogb121ht48atqx9c90bnuarh, fk_q7lor498b3rxc6al5xb1qclk3, fk_q5dpd1j5y4d50aqguvp592bi, fk_63m2w3c0a0lb4evolsw7s7kch]
+03 Set 2015 00:08:31  INFO TableMetadata - HHH000261: Table found: sanconrado_prod.imovel_pessoa_log
+03 Set 2015 00:08:31  INFO TableMetadata - HHH000037: Columns: [id, data_saida, data_alteracao, id_autorizador, id_imovel_pessoa, data_entrada, ativo, id_veiculo, data_inclusao, id_cartao, id_usuario_inclusao, id_usuario_alteracao, id_empresa]
+03 Set 2015 00:08:31  INFO TableMetadata - HHH000108: Foreign keys: [fk_2oahm67qjygjelb1x1xis3kmg, fk_ql4cwljv812c8uqgnnqvhxth8, fk_e3vu0gims3png2f62ay2ergrq, fk_p7ubja2smum3w8pbo48jis44m, fk_ar6xdo3dg60nixehnjeb3f3bu, fk_ekwmfu3e7yqhlyfn71lhe724t, fk_7t3nv4j21d54qikhw160kcq3x]
+03 Set 2015 00:08:31  INFO TableMetadata - HHH000126: Indexes: [fk_2oahm67qjygjelb1x1xis3kmg, fk_e3vu0gims3png2f62ay2ergrq, fk_ql4cwljv812c8uqgnnqvhxth8, fk_p7ubja2smum3w8pbo48jis44m, fk_ar6xdo3dg60nixehnjeb3f3bu, primary, fk_ekwmfu3e7yqhlyfn71lhe724t, fk_7t3nv4j21d54qikhw160kcq3x]
+03 Set 2015 00:08:31  INFO TableMetadata - HHH000261: Table found: sanconrado_prod.marca
+03 Set 2015 00:08:31  INFO TableMetadata - HHH000037: Columns: [id, data_alteracao, tp_veiculo, nome_fipe, ativo, chavefipe, data_inclusao, nome, idfipe, id_usuario_inclusao, id_usuario_alteracao, id_empresa]
+03 Set 2015 00:08:31  INFO TableMetadata - HHH000108: Foreign keys: [fk_6q8kyixkd33jsa3oik353ume1, fk_1n953mklpkiwh0fbe0c3s4h7x, fk_1m7cickm2e32mb3bkoxpj74gt]
+03 Set 2015 00:08:31  INFO TableMetadata - HHH000126: Indexes: [fk_6q8kyixkd33jsa3oik353ume1, fk_1n953mklpkiwh0fbe0c3s4h7x, uk_tm7ak65omfj01se4mhp2jilwl, fk_1m7cickm2e32mb3bkoxpj74gt, primary]
+03 Set 2015 00:08:31  INFO TableMetadata - HHH000261: Table found: sanconrado_prod.modelo
+03 Set 2015 00:08:31  INFO TableMetadata - HHH000037: Columns: [id, data_alteracao, nome_fipe, ativo, chavefipe, data_inclusao, nome, idfipe, id_usuario_inclusao, id_usuario_alteracao, id_marca, id_empresa]
+03 Set 2015 00:08:31  INFO TableMetadata - HHH000108: Foreign keys: [fk_pq1x5nvbx9us73k2o9f370t2v, fk_mescqbycvhw1h8rok5f3to474, fk_6y02alp87s4coeqdgyc1xfeis, fk_ivgcghevm6tds98tu0ndurr3d]
+03 Set 2015 00:08:31  INFO TableMetadata - HHH000126: Indexes: [fk_mescqbycvhw1h8rok5f3to474, fk_pq1x5nvbx9us73k2o9f370t2v, fk_6y02alp87s4coeqdgyc1xfeis, uk_89f203qhvu4r6lg560immv6uq, primary, fk_ivgcghevm6tds98tu0ndurr3d]
+03 Set 2015 00:08:31  INFO TableMetadata - HHH000261: Table found: sanconrado_prod.pais
+03 Set 2015 00:08:31  INFO TableMetadata - HHH000037: Columns: [id, data_alteracao, nacionalidade, sigla, ativo, data_inclusao, nome, id_usuario_inclusao, id_usuario_alteracao, id_empresa]
+03 Set 2015 00:08:31  INFO TableMetadata - HHH000108: Foreign keys: [fk_c1w41n4da7qq7xh418nfhwdr4, fk_r7dly4diq647kpn0wq09petgm, fk_5oyhf3chfe214wor589cdjici]
+03 Set 2015 00:08:31  INFO TableMetadata - HHH000126: Indexes: [primary, fk_c1w41n4da7qq7xh418nfhwdr4, fk_r7dly4diq647kpn0wq09petgm, fk_5oyhf3chfe214wor589cdjici]
+03 Set 2015 00:08:31  INFO TableMetadata - HHH000261: Table found: sanconrado_prod.pessoa
+03 Set 2015 00:08:31  INFO TableMetadata - HHH000037: Columns: [id, data_alteracao, tp_pessoa, tipo_pessoa, ativo, data_inclusao, id_usuario_inclusao, id_usuario_alteracao, id_empresa]
+03 Set 2015 00:08:31  INFO TableMetadata - HHH000108: Foreign keys: [fk_kh6l3c02i9blm02iw8r2uao3h, fk_8hsm8flliuuk7o1mnojfe4353, fk_2bax4tpa4be8pkjbts83f54eo]
+03 Set 2015 00:08:31  INFO TableMetadata - HHH000126: Indexes: [fk_kh6l3c02i9blm02iw8r2uao3h, fk_8hsm8flliuuk7o1mnojfe4353, primary, fk_2bax4tpa4be8pkjbts83f54eo]
+03 Set 2015 00:08:32  INFO TableMetadata - HHH000261: Table found: sanconrado_prod.pessoa_fisica
+03 Set 2015 00:08:32  INFO TableMetadata - HHH000037: Columns: [pf_id, sexo, rg, id_endereco, orgao_emissor_rg, id_pais, estadocivil, nome_pai, email, nome_mae, telefone, dt_nascimento, cpf, nome, dt_expedicao_rg, celular, orgao_emissor_rg_uf]
+03 Set 2015 00:08:32  INFO TableMetadata - HHH000108: Foreign keys: [fk_gpbhk8c9m5uobsnwn86h5s15k, fk_bd8ys345w27bhtfax3radgjkg, fk_s3d00yhnn9afti52jpx303t6c]
+03 Set 2015 00:08:32  INFO TableMetadata - HHH000126: Indexes: [uk_ta4jrg9thptqr4krkc4r70r57, fk_gpbhk8c9m5uobsnwn86h5s15k, primary, fk_bd8ys345w27bhtfax3radgjkg]
+03 Set 2015 00:08:32  INFO TableMetadata - HHH000261: Table found: sanconrado_prod.pessoa_imagem
+03 Set 2015 00:08:32  INFO TableMetadata - HHH000037: Columns: [file_size, file_path, thumb_name, data_inclusao, file_name, file_name_original, file_type, id, data_alteracao, pessoa_id, principal, ativo, thumb_namepdf, id_usuario_inclusao, id_usuario_alteracao, id_empresa]
+03 Set 2015 00:08:32  INFO TableMetadata - HHH000108: Foreign keys: [fk_bttqrl9r24hdeduuchroqidxa, fk_hviapce018hl98gmva4bxe86c, fk_rbv3asuhw3f4kjc510n4ywqox, fk_cdl9uy4k8x2yidevrwvky6fi8]
+03 Set 2015 00:08:32  INFO TableMetadata - HHH000126: Indexes: [fk_bttqrl9r24hdeduuchroqidxa, fk_hviapce018hl98gmva4bxe86c, fk_cdl9uy4k8x2yidevrwvky6fi8, fk_rbv3asuhw3f4kjc510n4ywqox, primary]
+03 Set 2015 00:08:32  INFO TableMetadata - HHH000261: Table found: sanconrado_prod.pessoa_juridica
+03 Set 2015 00:08:32  INFO TableMetadata - HHH000037: Columns: [site, nome_fantasia, id_pessoa_juridica, inscricao_municipal, inscricao_estadual, cpf_representante_legal, pj_id, orgao_representante_legal, representante_legal, cnpj, razao_social, rg_representante_legal]
+03 Set 2015 00:08:32  INFO TableMetadata - HHH000108: Foreign keys: [fk_doc5dy7a6isunde3jsk80x4m1, fk_emlj6rsw4q6d92aoi4btq0kw0]
+03 Set 2015 00:08:32  INFO TableMetadata - HHH000126: Indexes: [fk_doc5dy7a6isunde3jsk80x4m1, primary]
+03 Set 2015 00:08:32  INFO TableMetadata - HHH000261: Table found: sanconrado_prod.pessoa_veiculo
+03 Set 2015 00:08:32  INFO TableMetadata - HHH000037: Columns: [pessoa_id, veiculo_id]
+03 Set 2015 00:08:32  INFO TableMetadata - HHH000108: Foreign keys: [fk_ifa7ul2nhv8vhaw2mfybgv752, fk_w46uwvj15vnyxdp5k844kuxj]
+03 Set 2015 00:08:32  INFO TableMetadata - HHH000126: Indexes: [fk_ifa7ul2nhv8vhaw2mfybgv752, fk_w46uwvj15vnyxdp5k844kuxj]
+03 Set 2015 00:08:32  INFO TableMetadata - HHH000261: Table found: sanconrado_prod.pista
+03 Set 2015 00:08:32  INFO TableMetadata - HHH000037: Columns: [id, data_alteracao, ip_camera, ativo, tipopista, data_inclusao, id_portaria, id_usuario_inclusao, id_usuario_alteracao, id_empresa]
+03 Set 2015 00:08:32  INFO TableMetadata - HHH000108: Foreign keys: [fk_nwr5dawpb85tkiq84nraa2faf, fk_5wi78a9w9rrbw3k0krni8dka2, fk_ouc8i6ufs1wsj838kd9kj39nr, fk_qqcksgo6q5yuypnu7kf3owvct]
+03 Set 2015 00:08:32  INFO TableMetadata - HHH000126: Indexes: [fk_nwr5dawpb85tkiq84nraa2faf, fk_5wi78a9w9rrbw3k0krni8dka2, fk_ouc8i6ufs1wsj838kd9kj39nr, primary, fk_qqcksgo6q5yuypnu7kf3owvct]
+03 Set 2015 00:08:32  INFO TableMetadata - HHH000261: Table found: sanconrado_prod.portaria
+03 Set 2015 00:08:32  INFO TableMetadata - HHH000037: Columns: [id, data_alteracao, ip_camera, ativo, numero_portaria, data_inclusao, id_usuario_inclusao, id_usuario_alteracao, descricao, id_empresa]
+03 Set 2015 00:08:32  INFO TableMetadata - HHH000108: Foreign keys: [fk_sc62aqm58qfd7imyg8gyhb1ep, fk_pha15fx44w2f42vl7ok65uy30, fk_7i0g1dnyxijttgnyam3adalq5]
+03 Set 2015 00:08:32  INFO TableMetadata - HHH000126: Indexes: [fk_sc62aqm58qfd7imyg8gyhb1ep, fk_pha15fx44w2f42vl7ok65uy30, primary, fk_7i0g1dnyxijttgnyam3adalq5]
+03 Set 2015 00:08:32  INFO TableMetadata - HHH000261: Table found: sanconrado_prod.telefone
+03 Set 2015 00:08:32  INFO TableMetadata - HHH000037: Columns: [contato, data_inclusao, id_endereco, fl_principal, id, data_alteracao, ordem, ramal, ativo, tipotelefone, telefone, id_usuario_inclusao, id_usuario_alteracao, id_pessoa, id_empresa]
+03 Set 2015 00:08:32  INFO TableMetadata - HHH000108: Foreign keys: [fk_aukqktqllkgog1p04t2rygyi4, fk_emu0eevrs1prnwjx4yxsjdf9i, fk_be8twcfahoxcu11mfr0xq5jl4, fk_nkfeevc5dkjlr3fj2psc86g2y, fk_ppiwnxs4gd7blk3dveh1v146r]
+03 Set 2015 00:08:32  INFO TableMetadata - HHH000126: Indexes: [fk_aukqktqllkgog1p04t2rygyi4, fk_emu0eevrs1prnwjx4yxsjdf9i, fk_be8twcfahoxcu11mfr0xq5jl4, primary, fk_nkfeevc5dkjlr3fj2psc86g2y, fk_ppiwnxs4gd7blk3dveh1v146r]
+03 Set 2015 00:08:33  INFO TableMetadata - HHH000261: Table found: sanconrado_prod.tipo_contato
+03 Set 2015 00:08:33  INFO TableMetadata - HHH000037: Columns: [id, data_alteracao, ativo, id_tipo_contato, data_inclusao, nome, id_usuario_inclusao, id_usuario_alteracao, descricao, id_empresa]
+03 Set 2015 00:08:33  INFO TableMetadata - HHH000108: Foreign keys: [fk_san2dv8osro22vt9vyfchrx81, fk_9u764q3paftki6cq71twu4cxc, fk_mkn6wd8xlmpamdykljm90fs2c, fk_4w9lndjwjnrgw8or6mhtr5md0]
+03 Set 2015 00:08:33  INFO TableMetadata - HHH000126: Indexes: [fk_9u764q3paftki6cq71twu4cxc, fk_san2dv8osro22vt9vyfchrx81, fk_mkn6wd8xlmpamdykljm90fs2c, primary, fk_4w9lndjwjnrgw8or6mhtr5md0]
+03 Set 2015 00:08:33  INFO TableMetadata - HHH000261: Table found: sanconrado_prod.veiculos
+03 Set 2015 00:08:33  INFO TableMetadata - HHH000037: Columns: [id, id_tag, data_alteracao, st_veiculo, cor_veiculo, ativo, placa, data_inclusao, id_modelo, id_usuario_inclusao, id_usuario_alteracao, id_pessoa, id_empresa]
+03 Set 2015 00:08:33  INFO TableMetadata - HHH000108: Foreign keys: [fk_isxgi3lb0eihnh3mqabd4halm, fk_n9g0w0icc032plvx15my52fqd, fk_g4ck51nqg3f01rfqxki0nc4gt, fk_1vkkoa46n3wu73cwrg8fk6lel, fk_28hldt2ncqhhev0inkdej6iu9, fk_i65bjitkml7jibj5f8q3bhwd4]
+03 Set 2015 00:08:33  INFO TableMetadata - HHH000126: Indexes: [fk_isxgi3lb0eihnh3mqabd4halm, fk_g4ck51nqg3f01rfqxki0nc4gt, fk_n9g0w0icc032plvx15my52fqd, fk_1vkkoa46n3wu73cwrg8fk6lel, primary, uk_56sttcnrxhhfhrlr4bk4xqwna, fk_28hldt2ncqhhev0inkdej6iu9, fk_i65bjitkml7jibj5f8q3bhwd4]
+03 Set 2015 00:08:33  INFO SchemaUpdate - HHH000232: Schema update complete
+03 Set 2015 00:08:33  INFO TransactionFactoryInitiator - HHH000399: Using default transaction strategy (direct JDBC transactions)
+inicio veiculo Thu Sep 03 00:08:36 BRT 2015
+03 Set 2015 00:08:37  WARN SanConradoXLSLoader - Modelo nÃo encontrado PEUGEOT placa FIS-0380matricula Z020
+03 Set 2015 00:09:07  WARN SanConradoXLSLoader - Modelo nÃo encontrado PEUGEOT placa FIW-2130matricula Y1045
+03 Set 2015 00:11:10  WARN SanConradoXLSLoader - Modelo nÃo encontrado AUDI placa FKK-2369matricula J020
+03 Set 2015 00:11:22  WARN SanConradoXLSLoader - Modelo nÃo encontrado HONDA EXR placa FKQ-3639matricula L037
+03 Set 2015 00:12:10 ERROR AbstractGenericJPADAO - org.hibernate.NonUniqueResultException: query did not return a unique result: 2
+03 Set 2015 00:12:10 ERROR AbstractGenericJPADAO - org.hibernate.NonUniqueResultException: query did not return a unique result: 3
+03 Set 2015 00:12:10  WARN SanConradoXLSLoader - Modelo nÃo encontrado CLASSIC placa FKY-0448matricula A2020
+03 Set 2015 00:13:07  WARN SanConradoXLSLoader - Modelo nÃo encontrado BMW placa FLD-7556matricula R1014
+03 Set 2015 00:13:08  WARN SanConradoXLSLoader - Modelo nÃo encontrado MERCEDES placa FLD-8200matricula O017
+03 Set 2015 00:13:26  WARN SanConradoXLSLoader - Modelo nÃo encontrado VOLVO placa FLE-9325matricula B1054
+03 Set 2015 00:15:12 ERROR AbstractGenericJPADAO - org.hibernate.NonUniqueResultException: query did not return a unique result: 2
+03 Set 2015 00:15:12 ERROR AbstractGenericJPADAO - org.hibernate.NonUniqueResultException: query did not return a unique result: 3
+03 Set 2015 00:15:12  WARN SanConradoXLSLoader - Modelo nÃo encontrado CLASSIC placa FMH-2760matricula K010
+03 Set 2015 00:15:14  WARN SanConradoXLSLoader - Modelo nÃo encontrado PEUGEOT placa FMH-3359matricula R2043
+03 Set 2015 00:16:38  WARN SanConradoXLSLoader - Modelo nÃo encontrado F 500 placa FNC-4291matricula M027
+03 Set 2015 00:16:59  WARN SanConradoXLSLoader - Modelo nÃo encontrado PEUGEOT placa FNG-9183matricula G020
+03 Set 2015 00:17:14  WARN SanConradoXLSLoader - Modelo nÃo encontrado PEUGEOT placa FNI-9711matricula I002
+03 Set 2015 00:17:29 ERROR AbstractGenericJPADAO - org.hibernate.NonUniqueResultException: query did not return a unique result: 2
+03 Set 2015 00:17:29 ERROR AbstractGenericJPADAO - org.hibernate.NonUniqueResultException: query did not return a unique result: 3
+03 Set 2015 00:17:29  WARN SanConradoXLSLoader - Modelo nÃo encontrado CLASSIC placa FNJ-5562matricula F010
+03 Set 2015 00:17:32  WARN SanConradoXLSLoader - Modelo nÃo encontrado PEUGEOT placa FNL-9525matricula I002
+03 Set 2015 00:17:46  WARN SanConradoXLSLoader - Modelo nÃo encontrado BMW placa FNW-5000matricula G1015
+03 Set 2015 00:18:22 ERROR AbstractGenericJPADAO - org.hibernate.NonUniqueResultException: query did not return a unique result: 2
+03 Set 2015 00:18:22 ERROR AbstractGenericJPADAO - org.hibernate.NonUniqueResultException: query did not return a unique result: 3
+03 Set 2015 00:18:22  WARN SanConradoXLSLoader - Modelo nÃo encontrado CLASSIC placa FOH-9215matricula C026
+03 Set 2015 00:18:23  WARN SanConradoXLSLoader - Modelo nÃo encontrado A200 placa FOJ-9364matricula L1005
+03 Set 2015 00:18:25  WARN SanConradoXLSLoader - Modelo nÃo encontrado BMW800 placa FOL-2044matricula C1006A
+03 Set 2015 00:19:26  WARN SanConradoXLSLoader - Modelo nÃo encontrado BMW placa FQF-2552matricula Y017
+03 Set 2015 00:19:37 ERROR AbstractGenericJPADAO - org.hibernate.NonUniqueResultException: query did not return a unique result: 2
+03 Set 2015 00:19:37 ERROR AbstractGenericJPADAO - org.hibernate.NonUniqueResultException: query did not return a unique result: 3
+03 Set 2015 00:19:37  WARN SanConradoXLSLoader - Modelo nÃo encontrado CLASSIC placa FQH-4143matricula B2006
+03 Set 2015 00:20:36  WARN SanConradoXLSLoader - Modelo nÃo encontrado MERCEDES placa FRC-6626matricula J020
+03 Set 2015 00:20:45  WARN SanConradoXLSLoader - Modelo nÃo encontrado AUDI placa FRF-0548matricula O017
+03 Set 2015 00:21:07  WARN SanConradoXLSLoader - Modelo nÃo encontrado PEUGEOT placa FRT-8665matricula R033
+03 Set 2015 00:22:01  WARN SanConradoXLSLoader - Modelo nÃo encontrado JEEP placa FST-1921matricula N025
+03 Set 2015 00:22:07  WARN SanConradoXLSLoader - Modelo nÃo encontrado BMW placa FSW-7384matricula I2004
+03 Set 2015 00:22:26  WARN SanConradoXLSLoader - Modelo nÃo encontrado JEEP placa FTD-2595matricula J2019
+03 Set 2015 00:22:32 ERROR AbstractGenericJPADAO - org.hibernate.NonUniqueResultException: query did not return a unique result: 2
+03 Set 2015 00:22:32 ERROR AbstractGenericJPADAO - org.hibernate.NonUniqueResultException: query did not return a unique result: 3
+03 Set 2015 00:22:32  WARN SanConradoXLSLoader - Modelo nÃo encontrado CLASSIC placa FTG-0640matricula R1007
+03 Set 2015 00:23:35  WARN SanConradoXLSLoader - Modelo nÃo encontrado CHERRY placa FUK-8893matricula O1011B
+03 Set 2015 00:24:01  WARN SanConradoXLSLoader - Modelo nÃo encontrado BMW GS 1200 placa FUV-3380matricula J2002
+03 Set 2015 00:24:28  WARN SanConradoXLSLoader - Modelo nÃo encontrado AUDI placa FVZ-0020matricula D2017
+03 Set 2015 00:24:31 ERROR AbstractGenericJPADAO - org.hibernate.NonUniqueResultException: query did not return a unique result: 2
+03 Set 2015 00:24:32 ERROR AbstractGenericJPADAO - org.hibernate.NonUniqueResultException: query did not return a unique result: 3
+03 Set 2015 00:24:32  WARN SanConradoXLSLoader - Modelo nÃo encontrado CLASSIC placa FWD-4357matricula J025
+03 Set 2015 00:26:33  WARN SanConradoXLSLoader - Modelo nÃo encontrado HARLEY DAVIDSON placa GHI-1250matricula X1015
+03 Set 2015 00:26:39  WARN SanConradoXLSLoader - Modelo nÃo encontrado JEEP placa GLN-5488matricula L042
+03 Set 2015 00:27:06  WARN SanConradoXLSLoader - Modelo nÃo encontrado MERCEDES Z320 placa GZD-2000matricula U1018
+03 Set 2015 00:27:07 ERROR AbstractGenericJPADAO - org.hibernate.NonUniqueResultException: query did not return a unique result: 2
+03 Set 2015 00:27:07  WARN SanConradoXLSLoader - Modelo nÃo encontrado XR placa GZY-8450matricula M022
+03 Set 2015 00:27:23  WARN SanConradoXLSLoader - Modelo nÃo encontrado TENERE placa HEY-3768matricula C023
+03 Set 2015 00:27:58  WARN SanConradoXLSLoader - Modelo nÃo encontrado CITROEN placa HLZ 6232matricula R021
+03 Set 2015 00:28:30 ERROR AbstractGenericJPADAO - org.hibernate.NonUniqueResultException: query did not return a unique result: 6
+03 Set 2015 00:28:30  WARN SanConradoXLSLoader - Modelo nÃo encontrado BUGGY placa IGE-0413matricula D2018
+03 Set 2015 00:28:31  WARN SanConradoXLSLoader - Modelo nÃo encontrado EMIS BUGGY placa IGE-0413matricula D2018
+03 Set 2015 00:28:36  WARN SanConradoXLSLoader - Modelo nÃo encontrado MERCEDES placa IQJ-0020matricula Y013
+03 Set 2015 00:28:40  WARN SanConradoXLSLoader - Modelo nÃo encontrado CAYENE placa IZZ-7117matricula S027
+03 Set 2015 00:28:46  WARN SanConradoXLSLoader - Modelo nÃo encontrado JIMMY placa JFW-5894matricula T014
+03 Set 2015 00:29:01  WARN SanConradoXLSLoader - Modelo nÃo encontrado F 250 placa KEE-1790matricula S1001
+03 Set 2015 00:29:04  WARN SanConradoXLSLoader - Modelo nÃo encontrado MERCEDES placa KMB 2802matricula Q018
+03 Set 2015 00:29:08  WARN SanConradoXLSLoader - Modelo nÃo encontrado BMW placa KMQ-0037matricula M2038
+03 Set 2015 00:29:19  WARN SanConradoXLSLoader - Modelo nÃo encontrado BMW placa KZW-2992matricula P2014
+03 Set 2015 00:29:20 ERROR AbstractGenericJPADAO - org.hibernate.NonUniqueResultException: query did not return a unique result: 2
+03 Set 2015 00:29:20  WARN SanConradoXLSLoader - Modelo nÃo encontrado TOPIC placa LBO-3208matricula L003
+03 Set 2015 00:29:39 ERROR AbstractGenericJPADAO - org.hibernate.NonUniqueResultException: query did not return a unique result: 2
+03 Set 2015 00:29:39 ERROR AbstractGenericJPADAO - org.hibernate.NonUniqueResultException: query did not return a unique result: 3
+03 Set 2015 00:29:39  WARN SanConradoXLSLoader - Modelo nÃo encontrado CLASSIC placa LTS-4669matricula G003
+03 Set 2015 00:29:41  WARN SanConradoXLSLoader - Modelo nÃo encontrado VARIANT placa LYO-3030matricula I009
+03 Set 2015 00:29:42  WARN SanConradoXLSLoader - Modelo nÃo encontrado JEEP placa MAK-4167matricula B2001
+03 Set 2015 00:29:47  WARN SanConradoXLSLoader - Modelo nÃo encontrado LAND ROVER placa MFY-5760matricula Y020A
+03 Set 2015 00:29:52  WARN SanConradoXLSLoader - Modelo nÃo encontrado BMW placa MJH-0995matricula U1014
+03 Set 2015 00:30:06  WARN SanConradoXLSLoader - Modelo nÃo encontrado F 350 placa NFD-5974matricula F007
+03 Set 2015 00:30:14  WARN SanConradoXLSLoader - Modelo nÃo encontrado BMW placa NRJ-0650matricula Q020
+03 Set 2015 00:30:24  WARN SanConradoXLSLoader - Modelo nÃo encontrado BMW placa OBM 5217matricula F1019
+03 Set 2015 00:30:25  WARN SanConradoXLSLoader - Modelo nÃo encontrado BMW placa OBM-5217matricula F1019
+03 Set 2015 00:30:27 ERROR AbstractGenericJPADAO - org.hibernate.NonUniqueResultException: query did not return a unique result: 3
+03 Set 2015 00:30:27  WARN SanConradoXLSLoader - Modelo nÃo encontrado COUPE placa OGW-4699matricula G023
+03 Set 2015 00:30:29  WARN SanConradoXLSLoader - Modelo nÃo encontrado MERCEDES placa OHA-5799matricula H022
+03 Set 2015 00:31:36  WARN SanConradoXLSLoader - Modelo nÃo encontrado MOTO YAMAHRA placa S/P-LACAmatricula B2026
+03 Set 2015 00:31:42  WARN SanConradoXLSLoader - Modelo nÃo encontrado AUDI placa SXO-5045matricula Y1005
+03 Set 2015 00:31:48  WARN SanConradoXLSLoader - Modelo nÃo encontrado MERCEDES placa VDL-5959matricula H022
+03 Set 2015 00:31:53  WARN SanConradoXLSLoader - Modelo nÃo encontrado HUSKVANRNA placa \N32matricula R1015
+03 Set 2015 00:31:54  WARN SanConradoXLSLoader - Modelo nÃo encontrado YAMAHA WE placa \N33matricula R1015
+03 Set 2015 00:31:55  WARN SanConradoXLSLoader - Modelo nÃo encontrado JEEP placa \N34matricula Q2010
+03 Set 2015 00:31:56  WARN SanConradoXLSLoader - Modelo nÃo encontrado APRILIA placa \N35matricula Q1003
+03 Set 2015 00:32:10  WARN SanConradoXLSLoader - Modelo nÃo encontrado kawasaki Trilha placa \N49matricula N024
+03 Set 2015 00:32:11  WARN SanConradoXLSLoader - Modelo nÃo encontrado 10484S placa \N50matricula V1021
+fim veiculoThu Sep 03 00:32:11 BRT 2015
