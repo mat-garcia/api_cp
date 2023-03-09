@@ -1,7 +1,12 @@
 package com.cpconnect.api.jobIntegracao.services;
 
+import br.com.hdnit.lotus.domain.entity.corporativo.Parceiro;
+import br.com.hdnit.lotus.domain.entity.corporativo.dao.impl.ParceiroDAOImpl;
 import com.cpconnect.api.jobIntegracao.models.Booking;
 import com.cpconnect.api.jobIntegracao.models.ResNotification;
+
+import br.com.hdnit.lotus.domain.entity.corporativo.Reserva;
+import br.com.hdnit.lotus.domain.entity.corporativo.dao.impl.ReservaDAOImpl;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -32,6 +37,19 @@ public class ResNotificationService {
     }
 
     private final List<ResNotification> reservas = new ArrayList<>();
+
+    public long processarReserva(ResNotification resNotification) throws Exception {
+        ParceiroDAOImpl parceiroDAO = new ParceiroDAOImpl();
+        Parceiro parceiro = parceiroDAO.findParceiroId(2) ;
+
+        Reserva reserva = new Reserva(resNotification, parceiro);
+
+        ReservaDAOImpl reservaDAO = new ReservaDAOImpl();
+
+        long id = reservaDAO.saveOrUpdateAndReturnID(reserva);
+
+        return id;
+    }
 
 
     public long createReserva(ResNotification reserva) throws SQLException {

@@ -6,6 +6,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import br.com.hdnit.lotus.domain.entity.corporativo.Reserva;
+import br.com.hdnit.lotus.domain.entity.corporativo.dao.impl.ReservaDAOImpl;
+
 import java.sql.SQLException;
 import java.util.List;
 
@@ -14,7 +17,6 @@ import java.util.List;
 @SuppressWarnings("unused")
 public class ResNotificationController {
     private final ResNotificationService resNotificationService;
-
     public ResNotificationController(ResNotificationService resNotificationService) {
         this.resNotificationService = resNotificationService;
     }
@@ -24,15 +26,19 @@ public class ResNotificationController {
         return resNotificationService.getReservaList();
     }
     @PostMapping(value = "/insert_res")
-    public ResponseEntity<Object> createRes(@RequestBody ResNotification request) throws SQLException {
-        ResNotification reserva = new ResNotification(request.getMessageId(),request.getData());
-        long idReserva = resNotificationService.createReserva(reserva);
+    public ResponseEntity<Object> createRes(@RequestBody ResNotification request) throws Exception {
 
-        if(false) {
+        //Transforma o JSON em Objeto
+        ResNotification reservaNotification = new ResNotification(request.getMessageId(),request.getData());
+
+
+
+        try{
+            long idReserva = resNotificationService.processarReserva(reservaNotification);
             InsertResOk response = new InsertResOk(idReserva);
             return new ResponseEntity<>(response, HttpStatus.OK);
-        }else{
-            InsertResError response = new InsertResError("Erro ao tentar inserir a Reserva");
+        }catch (Exception e){
+            InsertResError response = new InsertResError("Erro ao processar a Reserva");
             return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
         }
 

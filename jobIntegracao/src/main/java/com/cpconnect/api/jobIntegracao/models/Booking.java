@@ -7,7 +7,7 @@ import java.util.List;
 public class Booking {
 
     @JsonProperty("bookingId")
-    private int bookingId;
+    private String bookingId;
     @JsonProperty("bookingPMSId")
     private String bookingPMSId;
     @JsonProperty("alphaId")
@@ -55,7 +55,7 @@ public class Booking {
     @JsonProperty("guestCounts")
     private List<GuestCounts> guestCounts;
 
-    public Booking(int bookingId, String bookingPMSId, String alphaId, String startDate, String endDate, String roomTypePMSId, Rules rules, List<Rates> rates, Payments payments, List<Guests> guests, Total total, String status, String source, Customer customer, Requestor requestor, String channelReservationNumber, String channel, String locator, String comments, String confirmation, Property property, String lastModified, String created, List<GuestCounts> guestCounts) {
+    public Booking(String bookingId, String bookingPMSId, String alphaId, String startDate, String endDate, String roomTypePMSId, Rules rules, List<Rates> rates, Payments payments, List<Guests> guests, Total total, String status, String source, Customer customer, Requestor requestor, String channelReservationNumber, String channel, String locator, String comments, String confirmation, Property property, String lastModified, String created, List<GuestCounts> guestCounts) {
         this.bookingId = bookingId;
         this.bookingPMSId = bookingPMSId;
         this.alphaId = alphaId;
@@ -82,11 +82,11 @@ public class Booking {
         this.guestCounts = guestCounts;
     }
 
-    public int getBookingId() {
+    public String getBookingId() {
         return bookingId;
     }
 
-    public void setBookingId(int bookingId) {
+    public void setBookingId(String bookingId) {
         this.bookingId = bookingId;
     }
 

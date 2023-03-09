@@ -97,6 +97,23 @@ public abstract class AbstractGenericJPADAO<T> implements GenericDAO<T>, Seriali
             throw new PersistenceException(e);
         }
     }
+    public Long saveOrUpdateAndReturnID(T clazz) throws PersistenceException {
+        Long id = null;
+        try {
+            startTransaction();
+
+            getSession().saveOrUpdate(clazz);
+            id = (Long) getSession().getIdentifier(clazz);
+
+            finishTransacton();
+        } catch (Exception e) {
+            e.printStackTrace();
+            e.getCause().printStackTrace();
+            transactionFailed();
+            throw new PersistenceException(e);
+        }
+        return id;
+    }
 
     @SuppressWarnings("unchecked")
     public void delete(T clazz, Integer id) throws PersistenceException {
