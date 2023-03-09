@@ -52,6 +52,21 @@ public class ReservaHospede implements Serializable {
 	@Basic(optional = false)
 	@Column(name = "ID", nullable = false)
 	private Integer id;
+	
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("ReservaHospede [id=");
+		builder.append(id);
+		builder.append(", nome_cliente=");
+		builder.append(nomeCliente);
+		builder.append(", sobrenome=");
+		builder.append(apelidoCliente);
+		builder.append(", reservaItem=");
+		builder.append(reservaItem);
+		builder.append("]");
+		return builder.toString();
+	}
 
 	public int getAge() {
 		return age;
@@ -65,6 +80,11 @@ public class ReservaHospede implements Serializable {
 	@JoinColumn(name = "ID_RESERVA")
 	@JsonIgnore
 	private Reserva reserva;
+	
+	@ManyToOne
+	@JoinColumn(name = "ID_RESERVA_ITEM")
+	@JsonIgnore
+	private ReservaItem reservaItem;
 	
 	public ReservaHospede() {
 		super();
@@ -117,6 +137,14 @@ public class ReservaHospede implements Serializable {
 	@Transient
 	protected String logradouro;
 	
+	public ReservaItem getReservaItem() {
+		return reservaItem;
+	}
+
+	public void setReservaItem(ReservaItem reservaItem) {
+		this.reservaItem = reservaItem;
+	}
+
 	public String getCep() {
 		return cep;
 	}

@@ -351,7 +351,43 @@
 			<artifactId>novaXsConnector</artifactId>
 			<version>1.0</version>
 		</dependency>
-	</dependencies>
+        <dependency>
+            <groupId>com.cpconnect.api</groupId>
+            <artifactId>jobIntegracao</artifactId>
+            <version>1.0.0</version>
+            <scope>compile</scope>
+        </dependency>
+		<dependency>
+			<groupId>com.cpconnect.api</groupId>
+			<artifactId>jobIntegracao</artifactId>
+			<version>1.0.0</version>
+			<scope>compile</scope>
+		</dependency>
+        <dependency>
+            <groupId>com.cpconnect.api</groupId>
+            <artifactId>jobIntegracao</artifactId>
+            <version>1.0.0</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.cpconnect.api</groupId>
+            <artifactId>jobIntegracao</artifactId>
+            <version>1.0.0</version>
+            <scope>compile</scope>
+        </dependency>
+		<dependency>
+			<groupId>com.cpconnect.api</groupId>
+			<artifactId>jobIntegracao</artifactId>
+			<version>1.0.0</version>
+			<scope>compile</scope>
+		</dependency>
+        <dependency>
+            <groupId>com.cpconnect.api</groupId>
+            <artifactId>jobIntegracao</artifactId>
+            <version>1.0.0</version>
+            <scope>compile</scope>
+        </dependency>
+    </dependencies>
 	<build>
 		<plugins>
 			<plugin>

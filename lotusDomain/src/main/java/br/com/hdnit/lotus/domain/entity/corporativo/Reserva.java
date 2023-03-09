@@ -54,6 +54,8 @@ import br.com.hdnit.lotus.foundation.util.TextUtils;
 import br.com.lotus.connector.services.Order;
 import br.com.lotus.connector.services.OrderRoom;
 import br.com.novaxs.rest.data.Reservation;
+import com.cpconnect.api.jobIntegracao.models.ResNotification;
+
 
 /**
  * 
@@ -1152,7 +1154,7 @@ public class Reserva extends AuditTrail {
 		return rHospedeCurr;
 	}
 
-	// OMINIBEES
+	// OMNIBEES
 	public Reserva(HotelReservationType rq, Date checkInTime, Date checkOutTime, Double markUp) {
 		
 		this.setTransactionIdentifier(rq.getUniqueID().get(0).getID());
@@ -1244,262 +1246,191 @@ public class Reserva extends AuditTrail {
 
 		int qtdAdultos = 0;
 		int qtdCriancas = 0;
+		Boolean solicitanteReserva;
 		
 		for (org.opentravel.ota._2003._05.ArrayOfRoomStay.RoomStay roomStay : rq.getRoomStays().getRoomStay()) {
+			solicitanteReserva = false;
+			
 			ReservaItem reservaItem = new ReservaItem(roomStay, this.getCodigoHotel());
+
 			this.servico = "";
+
 			if (roomStay.getServiceRPHs() != null) {
 				for (int i = 0; i < roomStay.getServiceRPHs().getServiceRPH().size(); i++) {
 					if (rq.getServices() != null) {
 						for (int j = 0; j < rq.getServices().getService().size(); j++) {
-							if (roomStay.getServiceRPHs().getServiceRPH().get(i).getRPH().equals(rq.getServices().getService().get(j).getServiceRPH())) {
+							if (roomStay.getServiceRPHs().getServiceRPH().get(i).getRPH()
+									.equals(rq.getServices().getService().get(j).getServiceRPH())) {
 								if (rq.getServices().getService().get(j).getPrice() != null) {
 									if (rq.getServices().getService().get(j).getPrice().get(0).getTotal() != null) {
-										if (rq.getServices().getService().get(j).getPrice().get(0).getTotal().getAmountAfterTax().compareTo((new BigDecimal(0))) > 0) {
-											this.servico += TextUtils.removerNonAscii(rq.getServices().getService().get(j).getServiceDetails().getServiceDescription().getText().get(0).getValue().trim()) + 
-													" ||" + rq.getServices().getService().get(j).getPrice().get(0).getTotal().getAmountAfterTax().toString() + "||, ";
+										if (rq.getServices().getService().get(j).getPrice().get(0).getTotal()
+												.getAmountAfterTax().compareTo((new BigDecimal(0))) > 0) {
+											this.servico += TextUtils
+													.removerNonAscii(rq.getServices().getService().get(j)
+															.getServiceDetails().getServiceDescription().getText()
+															.get(0).getValue().trim())
+													+ " ||" + rq.getServices().getService().get(j).getPrice().get(0)
+															.getTotal().getAmountAfterTax().toString()
+													+ "||, ";
 										} else {
-											this.servico += TextUtils.removerNonAscii(rq.getServices().getService().get(j).getServiceDetails().getServiceDescription().getText().get(0).getValue().trim()) + ", ";
+											this.servico += TextUtils.removerNonAscii(
+													rq.getServices().getService().get(j).getServiceDetails()
+															.getServiceDescription().getText().get(0).getValue().trim())
+													+ ", ";
 										}
 									} else {
-										this.servico += TextUtils.removerNonAscii(rq.getServices().getService().get(j).getServiceDetails().getServiceDescription().getText().get(0).getValue().trim()) + ", ";
+										this.servico += TextUtils.removerNonAscii(
+												rq.getServices().getService().get(j).getServiceDetails()
+														.getServiceDescription().getText().get(0).getValue().trim())
+												+ ", ";
 									}
 								} else {
-									this.servico += TextUtils.removerNonAscii(rq.getServices().getService().get(j).getServiceDetails().getServiceDescription().getText().get(0).getValue().trim()) + ", ";
+									this.servico += TextUtils
+											.removerNonAscii(rq.getServices().getService().get(j).getServiceDetails()
+													.getServiceDescription().getText().get(0).getValue().trim())
+											+ ", ";
 								}
 							}
 						}
 					}
 				}
-				
+
 				if (!this.servico.trim().isEmpty()) {
-					this.setServico(this.servico.substring(0, this.servico.length()-2));
+					this.setServico(this.servico.substring(0, this.servico.length() - 2));
 				}
 			}
+
+			// adcionar os hóspedes da reserva
+
+			// Contar a quantidade de adultos e crianças
+			qtdAdultos = Integer.valueOf(reservaItem.getQtdAdultos());
+			qtdCriancas = Integer.valueOf(reservaItem.getQtdCriancas());
+
+			if (rq.getResGlobalInfo().getHotelReservationIDs().getHotelReservationID().size() >= 3
+					&& rq.getResGlobalInfo().getHotelReservationIDs().getHotelReservationID().get(2)
+							.getResIDSource() != null
+					&& rq.getResGlobalInfo().getHotelReservationIDs().getHotelReservationID().get(2).getResIDSource()
+							.equalsIgnoreCase("PMS")) {
+				int x = 0;
+				for (int i = 2; i <= rq.getResGlobalInfo().getHotelReservationIDs().getHotelReservationID().size()
+						- 1; i++) {
+					if (rq.getResGlobalInfo().getHotelReservationIDs().getHotelReservationID().get(i)
+							.getResIDSource() != null) {
+						if (rq.getResGlobalInfo().getHotelReservationIDs().getHotelReservationID().get(i)
+								.getResIDSource().equalsIgnoreCase("PMS")) {
+							String idPms = rq.getResGlobalInfo().getHotelReservationIDs().getHotelReservationID().get(i)
+									.getResIDValue();
+							reservaItem.setNumeroReservaPms(idPms);
+							x++;
+						}
+					}
+				}
+			}
+
+			this.idadeCrianca = new ArrayList<Long>();
+
+			for (int i = 0; i < rq.getResGlobalInfo().getGuestCounts().getGuestCount().size(); i++) {
+
+				if (rq.getResGlobalInfo().getGuestCounts().getGuestCount().get(i).getAgeQualifyingCode().equals("8")) {
+					for (int j = 0; j < rq.getResGlobalInfo().getGuestCounts().getGuestCount().get(i).getCount(); j++) {
+						if (rq.getResGlobalInfo().getGuestCounts().getGuestCount().get(i).getAge() != null) {
+							Long idade = (long) rq.getResGlobalInfo().getGuestCounts().getGuestCount().get(i).getAge();
+							this.idadeCrianca.add(idade);
+							logger.info("CHD" + i + ":" + idade);
+						}
+					}
+				}
+			}
+
+			if (this.idadeCrianca.size() == 0) {
+				logger.info("A reserva não possui crianças!");
+				this.idadeCrianca = null;
+			}
+
+			int qtdGuestCount = 0;
+
+			// Conta a quantidade de hóspedes da reserva
+			int j = 0;
+			int indexGuestCount = 0;
+			qtdGuestCount = qtdAdultos + qtdCriancas;
+
+			logger.info("Inserindo reservas!");
 			
-			// Paliativo!
-//			if (rq.getResGlobalInfo().getGuestCounts().getGuestCount().size() > 1) {
-//			Integer qtdeCriancas = 0;
-//				
-//				for (int i = 0; i < rq.getResGlobalInfo().getGuestCounts().getGuestCount().size(); i++) {
-//					if (rq.getResGlobalInfo().getGuestCounts().getGuestCount().get(i).getAgeQualifyingCode() != null &&
-//						(rq.getResGlobalInfo().getGuestCounts().getGuestCount().get(i).getAgeQualifyingCode().equals("8") ||
-//						 rq.getResGlobalInfo().getGuestCounts().getGuestCount().get(i).getAgeQualifyingCode().equals("9"))
-//						) {
-//						qtdeCriancas += rq.getResGlobalInfo().getGuestCounts().getGuestCount().get(i).getCount();
-//					}
-//				}
+			logger.info("Total de ResGuest -> " + rq.getResGuests().getResGuest().size() + " - Total de GuestCount -> "
+					+ qtdGuestCount);
+
+			String[] arrayResGuestRPHs = roomStay.getResGuestRPHs().getContent().trim().split(",");
+
+			logger.info("RoomStay Index: " + roomStay.getIndexNumber() + " - resguestRPHs: "
+					+ Arrays.toString(arrayResGuestRPHs));
 			
-//			reserva
-//			}
+			for (org.opentravel.ota._2003._05.ResGuestType resGuest : rq.getResGuests().getResGuest()) {
+				GuestCountType.GuestCount guestCount = null;
+				
+				logger.info("resguestRPH " + resGuest.getResGuestRPH());
+
+				for (int k = 0; k < arrayResGuestRPHs.length; k++) {
+					// Regra para definir o adulto e crianca
+					if (arrayResGuestRPHs[k].equals(resGuest.getResGuestRPH())) {
+						logger.info("resGuestRPH " + resGuest.getResGuestRPH().toString() + " localizado.");
+
+						if (roomStay.getGuestCounts().getGuestCount().get(indexGuestCount).getCount() > j) {
+							guestCount = roomStay.getGuestCounts().getGuestCount().get(indexGuestCount);
+							j++;
+						} else {
+							j = 0;
+							indexGuestCount++;
+							guestCount = roomStay.getGuestCounts().getGuestCount().get(indexGuestCount);
+						}
+					} else {
+						// Adicionado p/ continuar procurando o hóspede da reserva
+						if (resGuest.isPrimaryIndicator() && !solicitanteReserva) {
+							solicitanteReserva = true;
+							guestCount = roomStay.getGuestCounts().getGuestCount().get(0);
+						} else {
+							continue;
+						}
+					}
+
+					ReservaHospede rHospede = new ReservaHospede(resGuest, guestCount);
+					rHospede.setReserva(this);
+					rHospede.setReservaItem(reservaItem);
+
+					if (rHospede.getPrincipal() == 1) {
+
+						this.setNomeCliente(TextUtils.removerNonAscii(rHospede.getNomeCliente().toUpperCase()));
+
+						this.setApelidoCliente(
+								rHospede.getApelidoCliente() == null || rHospede.getApelidoCliente().isEmpty() ? ""
+										: rHospede.getApelidoCliente().toUpperCase());
+
+						this.setApelidoCliente(TextUtils.removerNonAscii(this.getApelidoCliente()));
+
+						this.setTratamentoCliente(rHospede.getTratamentoCliente());
+
+						this.setDocumento(rHospede.getDocumento());
+
+						this.setTelefone(rHospede.getTelefone());
+
+						this.setEmail(rHospede.getEmail());
+						
+						// Se for apenas o solicitante da reserva, o mesmo não será add na reserva item e nem na reserva hospede
+						if (solicitanteReserva) {
+							continue;
+						}
+					}
+
+					reservaItem.getReservaHospede().add(rHospede);
+					this.getReservaHospedes().add(rHospede);
+				}
+			}
 			
 			reservaItem.setServico(this.servico);
 			reservaItem.setReserva(this);
 			reservaItem.setMarkUp(markUp);
 			this.getReservaItens().add(reservaItem);
-
+			
 		}
-		
-		// Contar a quantidade de adultos e crianças
-		for (int i = 0; i < this.getReservaItens().size(); i++) {
-			qtdAdultos += Integer.valueOf(this.getReservaItens().get(i).getQtdAdultos());
-			qtdCriancas += Integer.valueOf(this.getReservaItens().get(i).getQtdCriancas());
-		}
-
-		if (rq.getResGlobalInfo().getHotelReservationIDs().getHotelReservationID().size() >= 3
-				&& rq.getResGlobalInfo().getHotelReservationIDs().getHotelReservationID().get(2)
-						.getResIDSource() != null
-				&& rq.getResGlobalInfo().getHotelReservationIDs().getHotelReservationID().get(2).getResIDSource()
-						.equalsIgnoreCase("PMS")) {
-			int x = 0;
-			for (int i = 2; i <= rq.getResGlobalInfo().getHotelReservationIDs().getHotelReservationID().size()-1; i++) {
-				if (rq.getResGlobalInfo().getHotelReservationIDs().getHotelReservationID().get(i).getResIDSource() != null) {
-					if (rq.getResGlobalInfo().getHotelReservationIDs().getHotelReservationID().get(i).getResIDSource().equalsIgnoreCase("PMS")) {
-						String idPms = rq.getResGlobalInfo().getHotelReservationIDs().getHotelReservationID().get(i).getResIDValue();
-						this.getReservaItens().get(x).setNumeroReservaPms(idPms);
-						x++;
-					}
-				}
-			}
-		}
-
-		this.idadeCrianca = new ArrayList<Long>();
-		
-//		logger.info("Qtde de GuestCounts: " + rq.getResGlobalInfo().getGuestCounts().getGuestCount().get(0).getCount());
-		
-		for (int i = 0; i < rq.getResGlobalInfo().getGuestCounts().getGuestCount().size(); i++) {
-
-			if (rq.getResGlobalInfo().getGuestCounts().getGuestCount().get(i).getAgeQualifyingCode().equals("8")) {
-				for (int j = 0; j < rq.getResGlobalInfo().getGuestCounts().getGuestCount().get(i).getCount(); j++) {
-					if (rq.getResGlobalInfo().getGuestCounts().getGuestCount().get(i).getAge() != null) {
-						Long idade = (long) rq.getResGlobalInfo().getGuestCounts().getGuestCount().get(i).getAge();
-						this.idadeCrianca.add(idade);
-						logger.info("CHD" + i + ":" + idade);
-					}
-				}
-			}
-		}
-		
-		if (this.idadeCrianca.size() == 0) {
-			logger.info("A reserva não possui crianças!");
-			this.idadeCrianca = null;
-		}
-		
-		
-		int qtdGuestCount = 0;
-		boolean inconsistente = false;
-		
-		// Conta a quantidade de hóspedes da reserva
-		int j = 0;
-		int indexGuestCount = 0;
-		qtdGuestCount = qtdAdultos + qtdCriancas;
-		
-		logger.info("Total de ResGuest -> " + rq.getResGuests().getResGuest().size() + " - Total de GuestCount -> " + qtdGuestCount);
-		
-		if (rq.getRoomStays().getRoomStay().size() == 1) {
-			for (org.opentravel.ota._2003._05.ResGuestType resGuest : rq.getResGuests().getResGuest()) {
-				GuestCountType.GuestCount guestCount = null;
-				// Regra para definir o adulto e crianca
-				if (rq.getResGuests().getResGuest().size() <= qtdGuestCount) {
-					if (rq.getRoomStays().getRoomStay().get(0).getGuestCounts().getGuestCount().get(indexGuestCount).getCount() > j) {
-						guestCount = rq.getRoomStays().getRoomStay().get(0).getGuestCounts().getGuestCount().get(indexGuestCount);
-						j++;
-					} else {
-						j = 0;
-						indexGuestCount++;
-						guestCount = rq.getRoomStays().getRoomStay().get(0).getGuestCounts().getGuestCount().get(indexGuestCount);
-					}
-				} else {
-					inconsistente = true;
-					guestCount = rq.getRoomStays().getRoomStay().get(0).getGuestCounts().getGuestCount().get(0);
-					logger.info("O XML ESTA APRESENTANDO INCONSISTENCIA NA QUANTIDADE ENTRE RESGUEST E GUESTCOUNT!");
-				}
-
-				ReservaHospede rHospede = new ReservaHospede(resGuest, guestCount);
-				rHospede.setReserva(this);
-
-				if (rHospede.getPrincipal() == 1) {
-
-					this.setNomeCliente(TextUtils.removerNonAscii(rHospede.getNomeCliente().toUpperCase()));
-					
-					this.setApelidoCliente(rHospede.getApelidoCliente() == null || rHospede.getApelidoCliente().isEmpty() ? ""	: rHospede.getApelidoCliente().toUpperCase());
-
-					this.setApelidoCliente(TextUtils.removerNonAscii(this.getApelidoCliente()));
-
-					this.setTratamentoCliente(rHospede.getTratamentoCliente());
-
-					this.setDocumento(rHospede.getDocumento());
-
-					this.setTelefone(rHospede.getTelefone());
-
-					this.setEmail(rHospede.getEmail());
-				}
-
-				if (inconsistente) {
-					if (rHospede.getPrincipal() == 1) {
-						this.getReservaHospedes().add(rHospede);
-					}
-				} else {
-					this.getReservaHospedes().add(rHospede);
-				}
-			}
-		} else {
-			logger.info("Inserindo reservas múltiplas!");
-			boolean encontrouHospedePrincipal = false;
-
-			for (int i = 0; i < rq.getRoomStays().getRoomStay().size(); i++) {
-				j = 0;
-				indexGuestCount = 0;
-				
-				String[] arrayResGuestRPHs = rq.getRoomStays().getRoomStay().get(i).getResGuestRPHs().getContent().trim().split(",");
-				
-				logger.info("RoomStay Index: " + rq.getRoomStays().getRoomStay().get(i).getIndexNumber() + " - resguestRPHs: " + Arrays.toString(arrayResGuestRPHs));
-				
-				for (org.opentravel.ota._2003._05.ResGuestType resGuest : rq.getResGuests().getResGuest()) {
-					GuestCountType.GuestCount guestCount = null;
-					
-					logger.info("resguestRPH " + resGuest.getResGuestRPH());
-					
-					for (int k = 0; k < arrayResGuestRPHs.length; k++) {
-						
-						// Regra para definir o adulto e crianca
-						if (rq.getResGuests().getResGuest().size() <= qtdGuestCount) {
-							if (arrayResGuestRPHs[k].equals(resGuest.getResGuestRPH())) {
-								logger.info("resGuestRPH " + resGuest.getResGuestRPH().toString() + " localizado.");
-								
-								if (rq.getRoomStays().getRoomStay().get(i).getGuestCounts().getGuestCount().get(indexGuestCount).getCount() > j) {
-									guestCount = rq.getRoomStays().getRoomStay().get(i).getGuestCounts().getGuestCount().get(indexGuestCount);
-									j++;
-								} else {
-									j = 0;
-									indexGuestCount++;
-									guestCount = rq.getRoomStays().getRoomStay().get(i).getGuestCounts().getGuestCount().get(indexGuestCount);
-								}
-							} else {
-								if (resGuest.isPrimaryIndicator() == null) {
-									logger.info("PRIMARYINDICATOR NÃO EXISTE!");
-								}
-								
-								// Adicionado p/ continuar procurando o hóspede da reserva
-								if (resGuest.isPrimaryIndicator()) {
-									ReservaHospede rHospede = new ReservaHospede(resGuest, guestCount);
-
-									this.setNomeCliente(TextUtils.removerNonAscii(rHospede.getNomeCliente().toUpperCase()));
-									this.setApelidoCliente(rHospede.getApelidoCliente() == null || rHospede.getApelidoCliente().isEmpty() ? "" : rHospede.getApelidoCliente().toUpperCase());
-									this.setApelidoCliente(TextUtils.removerNonAscii(this.getApelidoCliente()));
-									this.setTratamentoCliente(rHospede.getTratamentoCliente());
-									this.setDocumento(rHospede.getDocumento());
-									this.setTelefone(rHospede.getTelefone());
-									this.setEmail(rHospede.getEmail());
-								}
-								continue;
-							}
-							
-						} else {
-							inconsistente = true;
-							guestCount = rq.getRoomStays().getRoomStay().get(i).getGuestCounts().getGuestCount().get(0);
-							logger.info("O XML ESTA APRESENTANDO INCONSISTENCIA NA QUANTIDADE ENTRE RESGUEST E GUESTCOUNT!");
-						}
-						
-						// Hospede principal so pode ser inserido uma vez!
-						if (encontrouHospedePrincipal) {
-							continue;
-						}
-						
-						ReservaHospede rHospede = new ReservaHospede(resGuest, guestCount);
-						rHospede.setReserva(this);
-						
-						if (rHospede.getPrincipal() == 1) {
-							
-							this.setNomeCliente(TextUtils.removerNonAscii(rHospede.getNomeCliente().toUpperCase()));
-							
-							this.setApelidoCliente(rHospede.getApelidoCliente() == null || rHospede.getApelidoCliente().isEmpty() ? "" : rHospede.getApelidoCliente().toUpperCase());
-							
-							this.setApelidoCliente(TextUtils.removerNonAscii(this.getApelidoCliente()));
-							
-							this.setTratamentoCliente(rHospede.getTratamentoCliente());
-							
-							this.setDocumento(rHospede.getDocumento());
-							
-							this.setTelefone(rHospede.getTelefone());
-							
-							this.setEmail(rHospede.getEmail());
-							
-							encontrouHospedePrincipal = true;
-						}
-						
-						if (inconsistente) {
-							if (rHospede.getPrincipal() == 1) {
-								this.getReservaHospedes().add(rHospede);
-							}
-						} else {
-							this.getReservaHospedes().add(rHospede);
-						}
-					}
-				}
-			}
-		}
-		
 
 		// Valida número de hospedes
 		/*
@@ -1692,13 +1623,18 @@ public class Reserva extends AuditTrail {
 		this.setDataOperacao(rq.getCreateDateTime().toGregorianCalendar().getTime());
 
 		String comentarioStr = "";
+		String comentarioTratamento = "";
 		
 		if (rq.getResGlobalInfo().getComments() != null) {
 			if (rq.getResGlobalInfo().getComments().getComment() != null) {
 
 				for (int i = 0; i < rq.getResGlobalInfo().getComments().getComment().size(); i++) {
-					if (rq.getResGlobalInfo().getComments().getComment().get(i).isGuestViewable()) {
-						comentarioStr += rq.getResGlobalInfo().getComments().getComment().get(i).getText().get(0).getValue() + ". ";
+					if (!rq.getResGlobalInfo().getComments().getComment().get(i).isGuestViewable()) {
+						comentarioTratamento = rq.getResGlobalInfo().getComments().getComment().get(i).getText().get(0).getValue() + ". "; 
+						comentarioTratamento = comentarioTratamento.substring(comentarioTratamento.indexOf(";") + 1, 
+											   								  comentarioTratamento.substring(comentarioTratamento.indexOf(";") + 1).indexOf(";")).replace("-", "");
+						
+						comentarioStr += comentarioTratamento; 
 					}
 				}
 				
@@ -1717,9 +1653,9 @@ public class Reserva extends AuditTrail {
 //		this.setComentario(obsClean + " - Código Promocional: " + codigoPromocional);
 //		this.setCodPromocional("Código Promocional: " + this.getCodigoPromocional());
 
-		if (inconsistente) {
-			this.setObservacao("O XML ESTA APRESENTANDO INCONSISTENCIA NA QUANTIDADE ENTRE RESGUEST E GUESTCOUNT!");
-		} 
+//		if (inconsistente) {
+//			this.setObservacao("O XML ESTA APRESENTANDO INCONSISTENCIA NA QUANTIDADE ENTRE RESGUEST E GUESTCOUNT!");
+//		} 
 	}
 
 	public TipoGarantiaEnum getTpGarantia() {
@@ -1988,8 +1924,8 @@ public class Reserva extends AuditTrail {
 		}
 
 		if (principal == null) {
-			this.getReservaHospedes().get(0).setPrincipal(1);
-			principal = this.getReservaHospedes().get(0);
+//			this.getReservaHospedes().get(0).setPrincipal(1);
+//			principal = this.getReservaHospedes().get(0);
 		}
 
 		this.setNomeCliente(TextUtils.removerNonAscii(principal.getNomeCliente()));
@@ -2030,6 +1966,119 @@ public class Reserva extends AuditTrail {
 		this.setTipoPagamento("-");
 
 		Object comentarioObj = rq.getAdditionalProperties().get("Comment");
+
+		String comentarioStr = "";
+		if (comentarioObj != null && comentarioObj instanceof String) {
+			if (((String) comentarioObj).length() > 1000) {
+				comentarioStr = ((String) comentarioObj).substring(0, 999);
+			} else {
+				comentarioStr = ((String) comentarioObj);
+			}
+		}
+
+		// String obsClean = comentarioStr.replaceAll("(\r\n|\r|\n|\n\r)","");
+		// obsClean = obsClean.replaceAll("[^a-zA-Z0-9]", "");
+		// System.out.println(obsClean);
+
+		String obsClean = TextUtils.removerNonAscii(comentarioStr);
+		this.setComentario(obsClean);
+
+	}
+
+	/**
+	 * B2B Integracao
+	 *
+	 * @throws Exception
+	 **/
+	public Reserva(ResNotification rq , Parceiro parceiroParam) throws Exception {
+		long time = System.currentTimeMillis();
+		this.setTransactionIdentifier(rq.getData().getBooking().getProperty().getHotelPMSId() + time);
+		this.setVersao(new BigDecimal("5.1"));
+
+		this.setUniqueIDParceiro(rq.getData().getBooking().getProperty().getHotelPMSId() + time);
+
+		Date dataChegada = DateUtils.getInstance().criaDataComString(rq.getData().getBooking().getStartDate(), "yyyy-MM-dd");
+		Date dataPartida = DateUtils.getInstance().criaDataComString(rq.getData().getBooking().getEndDate(), "yyyy-MM-dd");
+		Date dataOperacao = DateUtils.getInstance().criaDataComString(rq.getData().getTimestamp(),
+				"yyyy-MM-dd'T'HH:mm:ss");
+
+		this.setDataChegada(dataChegada);
+
+		this.setDataOperacao(dataOperacao);
+		this.setDataSaida(dataPartida);
+
+		this.setLocalizador(rq.getData().getBooking().getLocator());
+
+		this.setCodigoParceiro(parceiroParam.getCodParceiro());
+
+		this.setNomeParceiro(parceiroParam.getNomeParceiro());
+
+		this.setCodigoCanal(rq.getData().getBooking().getCustomer().getAgencyCode());
+		this.setNomeCanal(TextUtils.removerNonAscii(rq.getData().getBooking().getChannel()));
+		this.setMoedaReserva(rq.getData().getBooking().getRates().get(0).getCurrencyCode());
+
+		this.setUniqueIDReservaParceiro(rq.getData().getBooking().getBookingId());
+
+		this.setUniqueIDReservaCanal(parceiroParam.getCodParceiro());
+
+		ReservaHospede principal = null;
+		/*for (br.com.novaxs.rest.data.Guest resGuest : rq.getGuests()) {
+			ReservaHospede rHospede = new ReservaHospede(resGuest);
+			rHospede.setReserva(this);
+
+			this.getReservaHospedes().add(rHospede);
+
+			if (rHospede.getPrincipal().intValue() == 1) {
+				principal = rHospede;
+			}
+
+		}
+
+		if (principal == null) {
+//			this.getReservaHospedes().get(0).setPrincipal(1);
+//			principal = this.getReservaHospedes().get(0);
+		}*/
+
+		this.setNomeCliente(TextUtils.removerNonAscii(rq.getData().getBooking().getGuests().get(0).getName()));
+		this.setApelidoCliente(TextUtils.removerNonAscii(rq.getData().getBooking().getGuests().get(0).getSurname()));
+
+		this.setDocumento("0");
+
+		this.setEmail(rq.getData().getBooking().getGuests().get(0).getEmail());
+
+		this.setTelefone(rq.getData().getBooking().getGuests().get(0).getPhone());
+
+		this.setCodigoHotel(parceiroParam.getCodigoHotel());
+
+		/*ReservaItem reservaItem = new ReservaItem(rq.getRate(), rq.getADT(), rq.getCHD1() + rq.getCHD2(),
+				rq.getRoomCode(), rq.getPayments());
+		reservaItem.setReserva(this);
+		this.getReservaItens().add(reservaItem);
+
+		 */
+
+		this.setCodigoTarifa(rq.getData().getBooking().getRates().get(0).getRatePlanPMSId());
+		this.setIdentificadorPagamento("-");
+		this.setLocalizadorExtras("-");
+		this.setMoedaTarifa(rq.getData().getBooking().getRates().get(0).getCurrencyCode());
+		this.setTipoGarantia("-");
+		this.setXmlReserva("-");
+		this.setXmlReservaConfirma("-");
+
+		this.setValorTotal(String.valueOf(rq.getData().getBooking().getTotal().getAmountAfterTax()));
+
+		this.setValorBruto("-");
+		this.setTipoCartao("-");
+		this.setNomeCartao("-");
+		this.setNumeroCartao("-");
+
+		this.setValidadeCartao("-");
+		this.setCodigoVerificacaoCartao("-");
+		this.setCompanhiaFaturamento("-");
+
+		this.setTipoPagamento("-");
+
+		Object comentarioObj = rq.getData().getBooking().getComments();
 
 		String comentarioStr = "";
 		if (comentarioObj != null && comentarioObj instanceof String) {

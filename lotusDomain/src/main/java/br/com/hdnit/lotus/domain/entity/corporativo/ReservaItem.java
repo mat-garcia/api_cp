@@ -42,6 +42,7 @@ import com.belaviagem.www.wsdl.hotelService.Room;
 import br.com.hdnit.lotus.domain.entity.enums.StatusReservaEnum;
 import br.com.hdnit.lotus.domain.entity.enums.TipoPensaoEnum;
 import br.com.hdnit.lotus.foundation.util.DateUtils;
+import br.com.hdnit.lotus.foundation.util.TextUtils;
 import br.com.hdnit.lotus.foundation.util.exception.ValidacaoCampoException;
 import br.com.lotus.connector.services.OrderRoom;
 import br.com.lotus.connector.services.OrderRoomPrice;
@@ -96,7 +97,7 @@ public class ReservaItem implements Serializable {
 	@JoinColumn(name = "ID_RESERVA")
 	@JsonIgnore
 	private Reserva reserva;
-
+		
 	@Column(name = "ID_RESERVA_PMS", nullable = true)
 	private String idReservaPms;
 
@@ -131,6 +132,10 @@ public class ReservaItem implements Serializable {
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "reservaItem", orphanRemoval = true, cascade = {
 			javax.persistence.CascadeType.ALL })
 	private List<ReservaItemLancamento> reservaItensLancamento;
+	
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "reservaItem", orphanRemoval = true, cascade = {
+			javax.persistence.CascadeType.ALL })
+	private List<ReservaHospede> reservaHospede;
 	
 	/**
 	 * APARTAMENTO
@@ -269,6 +274,20 @@ public class ReservaItem implements Serializable {
 		this.servico = servico;
 	}
 	
+	
+	
+	public List<ReservaHospede> getReservaHospede() {
+		if (reservaHospede == null) {
+			reservaHospede = new ArrayList<ReservaHospede>();
+		}
+
+		return reservaHospede;
+	}
+
+	public void setReservaHospede(List<ReservaHospede> reservaHospede) {
+		this.reservaHospede = reservaHospede;
+	}
+
 	public ReservaItem() {
 
 	}
@@ -432,7 +451,8 @@ public class ReservaItem implements Serializable {
 
 		calcularTotal();
 	}
-
+	
+	// Omnibees
 	public ReservaItem(org.opentravel.ota._2003._05.ArrayOfRoomStay.RoomStay roomStay, String hotelCode) {
 		// TODO Auto-generated constructor stub
 		this.setCodigoHotel(hotelCode);
@@ -517,7 +537,9 @@ public class ReservaItem implements Serializable {
 		}
 		this.valorTotal = String.valueOf(valorTotalLocal);
 		
-	
+		
+		
+		
 	}
 
 	/** NOVA XS */
